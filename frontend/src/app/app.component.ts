@@ -17,7 +17,7 @@ export class AppComponent {
   }
 
   public getRequest() {
-    return this.http.get('http://technicalbusinessessentials.us-west-1.elasticbeanstalk.com/test')
+    return this.http.get('https://technicalbusinessessentialsserver.us-west-1.elasticbeanstalk.com/test')
       .subscribe(response => {
         this.textResponse = response;
       });
