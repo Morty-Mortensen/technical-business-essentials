@@ -1,0 +1,17 @@
+version: 0.2
+env:
+  shell: bash
+phases:
+  pre_build:
+    commands:
+      - echo "Entered the pre-build phase"
+  build:
+    commands:
+      - echo "Entered build phase"
+      - /bin/bash ./frontendBuild.sh
+  post_build:
+    commands:
+      - echo "Entering the post-build phase"
+artifacts:
+  files:
+    - frontendBuild/*
