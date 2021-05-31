@@ -1,4 +1,5 @@
 # Frontend build
+mkdir -p build
 rm -rf ./build/*
 #cd frontend || exit
 #rm -rf ./dist
