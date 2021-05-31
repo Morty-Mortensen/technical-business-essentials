@@ -6,3 +6,5 @@ npm install
 npm run build
 zip -r -j frontend.zip ./dist/frontend/. -x "*.DS_Store"
 mv frontend.zip ../frontendBuild
+cd ../frontendBuild || exit
+unzip frontend.zip
