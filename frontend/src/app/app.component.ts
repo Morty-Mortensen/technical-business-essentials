@@ -10,14 +10,16 @@ import {HttpClient} from "@angular/common/http";
 export class AppComponent {
   title = 'frontend';
 
+  public textResponse: any = '';
+
   constructor(private http: HttpClient) {
 
   }
 
   public getRequest() {
-    return this.http.get('http://localhost:8080/hello')
+    return this.http.get('http://technicalbusinessessentials.us-west-1.elasticbeanstalk.com/test')
       .subscribe(response => {
-        console.log(response);
+        this.textResponse = response;
       });
   }
 
