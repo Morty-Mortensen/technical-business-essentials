@@ -1,13 +1,13 @@
 # Frontend build
 rm -rf ./build/*
-cd frontend || exit
-rm -rf ./dist
-npm run build
-zip -r -j frontend.zip ./dist/frontend/. -x "*.DS_Store"
-mv frontend.zip ../build
-#cp -a ./dist/frontend/. ../build
+#cd frontend || exit
+#rm -rf ./dist
+#npm run build
+#zip -r -j frontend.zip ./dist/frontend/. -x "*.DS_Store"
+#mv frontend.zip ../build
 ## Transition
-cd ../backend || exit
+cd ./backend || exit #REMOVE LATER
+#cd ../backend || exit
 # Backend build
 mvn clean package
 cp ./target/technical-business-essentials-1.0-SNAPSHOT.jar ../build
