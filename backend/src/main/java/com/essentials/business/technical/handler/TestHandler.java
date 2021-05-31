@@ -13,7 +13,7 @@ import java.net.HttpURLConnection;
 public class TestHandler implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         sendStatusToClient(true, httpExchange);
-        sendResultToClient("This is a great message!!!", httpExchange);
+        sendResultToClient("It has changed :)", httpExchange);
     }
 
     private void sendResultToClient(Object result, HttpExchange exchange) throws IOException {
