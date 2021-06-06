@@ -19,8 +19,7 @@ public class TestHandler implements HttpHandler {
 
     private void sendResultToClient(Object result, HttpExchange exchange) throws IOException {
         OutputStream responseBody = exchange.getResponseBody();
-//        String jsonResult = Serializer.serialize(result);
-        String jsonResult = (String) result;
+        String jsonResult = Serializer.serialize(result);
         writeString(jsonResult, responseBody);
         responseBody.close();
     }
