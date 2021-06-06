@@ -11,13 +11,14 @@ export class AppComponent {
   title = 'frontend';
 
   public textResponse: any = '';
+  public url: any = '';
 
   constructor(private http: HttpClient) {
 
   }
 
   public getRequest() {
-    return this.http.get('https://technicalbusinessessentialsserver.us-west-1.elasticbeanstalk.com/test')
+    return this.http.get(this.url)
       .subscribe(response => {
         this.textResponse = response;
       });

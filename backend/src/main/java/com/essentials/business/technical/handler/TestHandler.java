@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 
 public class TestHandler implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
+        httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         sendStatusToClient(true, httpExchange);
         sendResultToClient("It has changed :)", httpExchange);
     }

@@ -8,10 +8,18 @@ phases:
   build:
     commands:
       - echo "Entered build phase"
+      - /bin/bash ./frontendBuild.sh
       - /bin/bash ./backendBuild.sh
   post_build:
     commands:
       - echo "Entering the post-build phase"
 artifacts:
-  files:
-    - backendBuild/*
+  secondary-artifacts:
+    client:
+      files:
+        - '**/*'
+      base-directory: frontendBuild
+    server:
+      files:
+        - '**/*'
+      base-directory: backendBuild
