@@ -1,5 +1,3 @@
 .idea
-
-frontendBuild
-backendBuild
+build
 .DS_Store

@@ -10,7 +10,7 @@ import java.net.HttpURLConnection;
 public class TestHandler implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         try {
-            ServerResponse.sendResultToClient("\"Backend Update\"", HttpURLConnection.HTTP_OK, httpExchange);
+            ServerResponse.sendResultToClient("\"Backend Update\"", httpExchange);
         } catch (Exception e) {
             ServerResponse.sendErrorToClient(e, httpExchange);
         }

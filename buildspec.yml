@@ -18,8 +18,8 @@ artifacts:
     client:
       files:
         - '**/*'
-      base-directory: frontendBuild
+      base-directory: ./build/frontend
     server:
       files:
         - '**/*'
-      base-directory: backendBuild
+      base-directory: ./build/backend

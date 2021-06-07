@@ -10,8 +10,8 @@ import java.net.HttpURLConnection;
 
 public class ServerResponse {
 
-    public static void sendResultToClient(Object result, int statusCode, HttpExchange exchange) throws IOException {
-        sendStatusToClient(statusCode, exchange);
+    public static void sendResultToClient(Object result, HttpExchange exchange) throws IOException {
+        sendStatusToClient(HttpURLConnection.HTTP_OK, exchange);
         writeData(result, exchange.getResponseBody());
     }
 
