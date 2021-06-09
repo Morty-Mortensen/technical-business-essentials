@@ -5,6 +5,7 @@ pwd
 cd ./frontend || exit
 echo "---In Frontend---"
 pwd
+ls
 rm -rf ./dist
 npm install
 npm run build
