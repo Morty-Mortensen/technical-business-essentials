@@ -1,5 +1,7 @@
 mkdir -p ./frontend
 rm -rf ./frontend/*
+ls
+ls ../
 cd ../frontend || exit
 rm -rf ./dist
 npm install
