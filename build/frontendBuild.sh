@@ -1,6 +1,10 @@
 mkdir -p ./frontend
 rm -rf ./frontend/*
+echo "---Entering Frontend---"
+pwd
 cd ./frontend || exit
+echo "---In Frontend---"
+pwd
 rm -rf ./dist
 npm install
 npm run build
