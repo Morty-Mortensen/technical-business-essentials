@@ -1,8 +1,7 @@
 mkdir -p ./frontend
 rm -rf ./frontend/*
-cd ./frontend || exit
+cd ../frontend || exit
 rm -rf ./dist
-ls
 npm install
 npm run build
 zip -r -j frontend.zip ./dist/frontend/. -x "*.DS_Store"
