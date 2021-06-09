@@ -1,0 +1,33 @@
+<mat-card style="display: flex; width: 100%; height: 50px; border-radius: 0" class="primary-background">
+  <div style="display: flex; width: 33%; height: 100%; justify-content: center; align-content: center">
+
+  </div>
+  <div style="display: flex; width: 34%; height: 100%; justify-content: center; align-content: center">
+    <img style="z-index: 1; height: 300px; margin-top: -125px" src="/assets/technicalbusinessessentialsopacity.png"/>
+  </div>
+  <div style="display: flex; width: 33%; height: 100%; justify-content: center; align-content: center">
+
+  </div>
+</mat-card>
+<mat-card
+  style="z-index: 1; display: flex; width: 100%; height: 25px; border-radius: 0; border-top: solid black 1px; justify-content: center; align-items: center"
+  class="primary-background">
+  <button style="margin-right: 5px" mat-button [matMenuTriggerFor]="businessActions">Business Actions</button>
+  <mat-menu #businessActions="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="accounting">Accounting</button>
+  </mat-menu>
+
+  <mat-menu #accounting="matMenu">
+    <button mat-menu-item>Sock Tickers</button>
+    <button mat-menu-item>Fortune 500</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="apComputerScience">AP Computer Science</button>
+  <mat-menu #apComputerScience="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="apComputerScienceLesson1">Lesson 1</button>
+  </mat-menu>
+  <mat-menu #apComputerScienceLesson1="matMenu">
+    <button mat-menu-item>History of CS</button>
+    <button mat-menu-item>Types</button>
+  </mat-menu>
+</mat-card>

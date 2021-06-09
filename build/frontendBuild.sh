@@ -1,5 +1,6 @@
-rm -rf ./build/frontend/*
-cd frontend || exit
+mkdir -p ./frontend
+rm -rf ./frontend/*
+cd ../frontend || exit
 rm -rf ./dist
 npm install
 npm run build
