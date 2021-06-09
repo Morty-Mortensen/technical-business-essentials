@@ -1,12 +1,7 @@
-mkdir -p ./frontend
-rm -rf ./frontend/*
-echo "---Entering Frontend---"
-pwd
+mkdir -p ./build/frontend
+rm -rf ./build/frontend/*
+rm -rf ./frontend/dist
 cd ./frontend || exit
-echo "---In Frontend---"
-pwd
-ls
-rm -rf ./dist
 npm install
 npm run build
 zip -r -j frontend.zip ./dist/frontend/. -x "*.DS_Store"
