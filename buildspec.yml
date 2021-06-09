@@ -8,8 +8,8 @@ phases:
   build:
     commands:
       - echo "Entered build phase"
-      - /bin/bash ./frontendBuild.sh
-      - /bin/bash ./backendBuild.sh
+      - /bin/bash ./build/frontendBuild.sh
+      - /bin/bash ./build/backendBuild.sh
   post_build:
     commands:
       - echo "Entering the post-build phase"
