@@ -1,3 +1,4 @@
+# Starts from root directory.
 mkdir -p ./build/frontend
 rm -rf ./build/frontend/*
 rm -rf ./frontend/dist
@@ -10,3 +11,5 @@ mv frontend.zip ../../../build/frontend
 cd ../../../build/frontend || exit
 unzip frontend.zip
 rm -f frontend.zip
+
+# Pictures will need to be deleted manually.

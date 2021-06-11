@@ -1,0 +1,32 @@
+<div class="register-container">
+  <mat-card class="register-card-container">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <div class="register-card">
+      <app-input
+        [label]="'First Name'"
+        (output)="firstName = $event">
+      </app-input>
+      <app-input
+        [label]="'Last Name'"
+        (output)="lastName = $event">
+      </app-input>
+      <app-input
+        [label]="'Username'"
+        (output)="username = $event">
+      </app-input>
+      <app-input
+        [label]="'Password'"
+        [type]="'password'"
+        (output)="password = $event">
+      </app-input>
+      <div
+        class="register-button-container">
+        <button class="primary-background register-button"
+                mat-button>Submit
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>

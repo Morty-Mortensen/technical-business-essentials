@@ -1,0 +1,7 @@
+<mat-form-field class="form-field" appearance="fill">
+  <mat-label>{{label}}</mat-label>
+  <input (keyup)="inputSelected()" [(ngModel)]="value"
+         class="form-input"
+         [type]="type"
+         matInput/>
+</mat-form-field>

@@ -1,0 +1,27 @@
+<div class="login-container">
+  <mat-card class="login-card-container">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <div class="login-card">
+      <app-input
+        [label]="'Username'"
+        (output)="username = $event">
+      </app-input>
+      <app-input
+        [label]="'Password'"
+        [type]="'password'"
+        (output)="firstName = $event">
+      </app-input>
+      <div
+        class="login-button-container">
+        <button class="primary-background login-button"
+                mat-button>Submit
+        </button>
+      </div>
+    </div>
+  </mat-card>
+  <div class="login-not-registered-container">
+    <a routerLink="/register">Don't have an account yet? Register here.</a>
+  </div>
+</div>

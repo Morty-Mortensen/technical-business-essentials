@@ -17,13 +17,27 @@ body {
 // default theme:
 $primary: mat-palette($mat-indigo, 800);
 $accent: mat-palette($mat-pink, A200, A100, A400);
+$input: mat-palette($mat-grey, 100);
 $warn: mat-define-palette($mat-red);
 
 .primary {
-  color: mat-color($primary, text);
+  color: mat-color($primary, text) !important;
 }
 
 
 .primary-background {
-  background-color: mat-color($primary, default);;
+  background-color: mat-color($primary, default) !important;
+}
+
+.input-background {
+  background-color: mat-color($input, default) !important;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: inherit;
 }

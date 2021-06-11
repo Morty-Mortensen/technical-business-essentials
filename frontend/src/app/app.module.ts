@@ -8,19 +8,36 @@ import {NavbarComponent} from './views/navbar/navbar.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
+import {LoginComponent} from './views/login/login.component';
+import {RegisterComponent} from './views/register/register.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {CommonModule} from "@angular/common";
+import {HomeComponent} from './views/home/home.component';
+import {MatInputModule} from "@angular/material/input";
+import {InputComponent} from './components/input/input.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    FormsModule,
+    AppRoutingModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatMenuModule,
     MatButtonModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,57 @@
+.navbar-container {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  border-radius: 0;
+}
+
+.navbar-sections {
+  display: flex;
+  width: 33%;
+  height: 100%;
+  justify-content: center;
+  align-content: center;
+}
+
+.navbar-image {
+  z-index: 1;
+  height: 300px;
+  margin-top: -125px;
+}
+
+.navbar-login-section {
+  display: flex;
+  width: 33%;
+  height: 100%;
+}
+
+.navbar-login-link {
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+  width: 100%;
+}
+
+.navbar-login-button {
+  margin-right: 15px;
+  width: 25%;
+  border-radius: 50px;
+  color: whitesmoke;
+}
+
+.navbar-navigation-container {
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  height: 20px;
+  border-radius: 0;
+  border-top: solid black 1px;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-link {
+  margin-right: 5px;
+  background-color: transparent;
+  color: whitesmoke;
+}

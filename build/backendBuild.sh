@@ -1,3 +1,4 @@
+# Starts from root directory.
 mkdir -p ./build/backend
 rm -rf ./build/backend/*
 mvn clean package
