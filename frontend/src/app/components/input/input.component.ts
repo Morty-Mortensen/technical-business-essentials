@@ -1,4 +1,5 @@
 import {Component, Input, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-input',
@@ -10,7 +11,10 @@ export class InputComponent implements OnInit {
   @Input() label: string = '';
   @Input() type: string = 'text';
   @Output() output = new EventEmitter<string>();
-  public value: string = '';
+
+  public value = new FormControl('', [
+    Validators.required
+  ]);
 
   constructor() {
   }
@@ -19,7 +23,7 @@ export class InputComponent implements OnInit {
   }
 
   public inputSelected(): void {
-    this.output.emit(this.value);
+    this.output.emit(this.value.value);
   }
 
 }

@@ -1,7 +1,10 @@
 <mat-form-field class="form-field" appearance="fill">
   <mat-label>{{label}}</mat-label>
-  <input (keyup)="inputSelected()" [(ngModel)]="value"
+  <input (keyup)="inputSelected()" [formControl]="value"
          class="form-input"
          [type]="type"
          matInput/>
+  <mat-error *ngIf="value.hasError('required')">
+    The {{label}} is <strong>required</strong>
+  </mat-error>
 </mat-form-field>

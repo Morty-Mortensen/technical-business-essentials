@@ -15,7 +15,7 @@ import {CommonModule} from "@angular/common";
 import {HomeComponent} from './views/home/home.component';
 import {MatInputModule} from "@angular/material/input";
 import {InputComponent} from './components/input/input.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     AppRoutingModule,
     BrowserAnimationsModule,

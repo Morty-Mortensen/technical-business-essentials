@@ -7,8 +7,6 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  public firstName: string = '';
-  public lastName: string = '';
   public username: string = '';
   public password: string = '';
 
@@ -16,6 +14,22 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  private isValid(): boolean {
+    return this.username !== '' && this.password !== '';
+  }
+
+  async onSubmit(): Promise<void> {
+    try {
+      if (this.isValid()) {
+
+      } else {
+
+      }
+    } catch (ex) {
+
+    }
   }
 
 }
