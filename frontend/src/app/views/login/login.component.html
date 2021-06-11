@@ -1,6 +1,6 @@
 <div class="login-container">
   <mat-card class="login-card-container">
-    <mat-card-header>
+    <mat-card-header class="login-card-header">
       <mat-card-title>Login</mat-card-title>
     </mat-card-header>
     <div class="login-card">
@@ -15,8 +15,11 @@
       </app-input>
       <div
         class="login-button-container">
-        <button class="primary-background login-button"
-                mat-button>Submit
+        <button
+          [ngClass]="!isValid() ? 'login-button-disabled' : 'primary-background'"
+          class="login-button"
+          mat-button
+          [disabled]="!isValid()">Submit
         </button>
       </div>
     </div>

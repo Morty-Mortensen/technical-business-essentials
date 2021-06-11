@@ -9,7 +9,6 @@
 
 .login-card-container {
   width: 35%;
-  height: 32%;
   padding: 30px;
   margin: 20px;
 }
@@ -19,6 +18,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.login-card-header {
+  margin-bottom: 5px;
 }
 
 .login-button-container {
@@ -41,4 +44,12 @@
   justify-content: center;
   align-items: center;
   color: orange;
+}
+
+.login-button-disabled {
+  background-color: gray;
+}
+
+app-input:not(:last-child) {
+  margin-bottom: 5px;
 }

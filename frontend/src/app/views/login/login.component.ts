@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  private isValid(): boolean {
+  public isValid(): boolean {
     return this.username !== '' && this.password !== '';
   }
 

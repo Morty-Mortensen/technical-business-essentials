@@ -18,4 +18,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public isValid(): boolean {
+    return this.firstName !== ''
+      && this.lastName !== ''
+      && this.username !== ''
+      && this.password !== ''
+  }
 }

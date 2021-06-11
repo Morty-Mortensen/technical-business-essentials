@@ -8,7 +8,6 @@
 
 .register-card-container {
   width: 35%;
-  height: 50%;
   padding: 30px;
   margin: 20px;
 }
@@ -18,6 +17,14 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.register-card-header {
+  margin-bottom: 5px;
+}
+
+.register-button-disabled {
+  background-color: gray;
 }
 
 .register-button-container {
@@ -32,4 +39,8 @@
   width: 45%;
   border-radius: 30px;
   font-size: 20px;
+}
+
+app-input:not(:last-child) {
+  margin-bottom: 5px;
 }

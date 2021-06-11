@@ -1,6 +1,6 @@
 <div class="register-container">
   <mat-card class="register-card-container">
-    <mat-card-header>
+    <mat-card-header class="register-card-header">
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
     <div class="register-card">
@@ -23,8 +23,11 @@
       </app-input>
       <div
         class="register-button-container">
-        <button class="primary-background register-button"
-                mat-button>Submit
+        <button
+          [ngClass]="!isValid() ? 'register-button-disabled' : 'primary-background'"
+          class="register-button"
+          mat-button
+          [disabled]="!isValid()">Submit
         </button>
       </div>
     </div>
