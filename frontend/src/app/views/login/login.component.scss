@@ -10,7 +10,7 @@
 .login-card-container {
   width: 35%;
   padding: 30px;
-  margin: 20px;
+  margin: 200px 20px 20px 20px;
 }
 
 .login-card {
@@ -47,7 +47,7 @@
 }
 
 .login-button-disabled {
-  background-color: gray;
+  background-color: lightgray;
 }
 
 app-input:not(:last-child) {
