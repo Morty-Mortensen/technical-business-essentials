@@ -1,0 +1,17 @@
+<div class="fortune-fivehundred-companies-info">
+  <mat-card>
+    <mat-card-header class="fortune-fivehundred-card-header">
+      <mat-card-title>Fortune 500 Companies</mat-card-title>
+    </mat-card-header>
+    <div class="fortune-fivehundred-card">
+      <app-datepicker-range
+        (output)="dateRange = $event">
+      </app-datepicker-range>
+    </div>
+    <div
+      class="fortune-fivehundred-companies-button-container">
+      <button (click)="submit()" mat-button class="primary-background fortune-fivehundred-companies-button">Submit
+      </button>
+    </div>
+  </mat-card>
+</div>

@@ -18,6 +18,13 @@ import {InputComponent} from './components/input/input.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FooterComponent} from './views/footer/footer.component';
 import {MatIconModule} from "@angular/material/icon";
+import {FortuneFivehundredComponent} from './views/fortune-fivehundred/fortune-fivehundred.component';
+import {FortuneFivehundredCompanyInfoComponent} from './views/fortune-fivehundred/components/fortune-fivehundred-company-info/fortune-fivehundred-company-info.component';
+import {SubHeaderComponent} from './components/sub-header/sub-header.component';
+import {DatepickerRangeComponent} from './components/datepicker-range/datepicker-range.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -27,7 +34,11 @@ import {MatIconModule} from "@angular/material/icon";
     RegisterComponent,
     HomeComponent,
     InputComponent,
-    FooterComponent
+    FooterComponent,
+    FortuneFivehundredComponent,
+    FortuneFivehundredCompanyInfoComponent,
+    SubHeaderComponent,
+    DatepickerRangeComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +54,9 @@ import {MatIconModule} from "@angular/material/icon";
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,31 @@
+.sub-header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  padding: 30px;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: black;
+  color: whitesmoke;
+}
+
+.sub-header-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 15%;
+  font-size: 30px;
+}
+
+.sub-header-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 85%;
+  font-size: 15px;
+}
+
+.sub-header-links a:not(:last-child) {
+  margin-right: 25px;
+}

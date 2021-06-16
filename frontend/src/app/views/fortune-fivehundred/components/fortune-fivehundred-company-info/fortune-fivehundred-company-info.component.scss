@@ -1,0 +1,31 @@
+.fortune-fivehundred-companies-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.fortune-fivehundred-card-header {
+  margin-bottom: 5px;
+}
+
+.fortune-fivehundred-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.fortune-fivehundred-companies-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.fortune-fivehundred-companies-button {
+  color: whitesmoke;
+  border-radius: 20px;
+  width: 50%;
+}

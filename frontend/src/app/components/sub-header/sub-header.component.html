@@ -1,0 +1,11 @@
+<div
+  class="sub-header-container">
+  <div
+    class="sub-header-title">
+    {{title}}
+  </div>
+  <div class="sub-header-links">
+    <a routerLink="{{link.route}}" *ngFor="let link of links">{{link.name}}</a>
+  </div>
+</div>
+
