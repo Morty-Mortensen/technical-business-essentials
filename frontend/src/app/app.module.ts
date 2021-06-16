@@ -16,6 +16,8 @@ import {HomeComponent} from './views/home/home.component';
 import {MatInputModule} from "@angular/material/input";
 import {InputComponent} from './components/input/input.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FooterComponent} from './views/footer/footer.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    InputComponent
+    InputComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
