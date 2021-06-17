@@ -16,7 +16,7 @@ public class ServerResponse {
     }
 
     public static void sendErrorToClient(Exception exception, HttpExchange exchange) throws IOException {
-        if (exception.getMessage().toLowerCase().contains("Bad Request")) {
+        if (exception.getMessage().toUpperCase().contains("BAD REQUEST")) {
             sendStatusToClient(HttpURLConnection.HTTP_BAD_REQUEST, exchange);
         } else {
             sendStatusToClient(HttpURLConnection.HTTP_INTERNAL_ERROR, exchange);
@@ -25,8 +25,7 @@ public class ServerResponse {
     }
 
     private static void writeData(Object result, OutputStream responseBody) throws IOException {
-//        String jsonResult = Serializer.serialize(result);
-        String jsonResult = (String) result;
+        String jsonResult = Serializer.serialize(result);
         OutputStreamWriter sw = new OutputStreamWriter(responseBody);
         BufferedWriter bw = new BufferedWriter(sw);
         bw.write(jsonResult);
