@@ -1,7 +1,7 @@
-package com.essentials.business.technical.dao;
+package com.essentials.business.technical.dao.factory;
 
-import com.essentials.business.technical.dao.interfaces.DAOFactory;
-import com.essentials.business.technical.dao.interfaces.IFortuneFivehundredDao;
+import com.essentials.business.technical.dao.SeleniumFortuneFivehundredDao;
+import com.essentials.business.technical.dao.IFortuneFivehundredDao;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

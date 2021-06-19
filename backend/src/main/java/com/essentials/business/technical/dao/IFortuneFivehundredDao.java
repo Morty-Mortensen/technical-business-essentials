@@ -1,4 +1,4 @@
-package com.essentials.business.technical.dao.interfaces;
+package com.essentials.business.technical.dao;
 
 import java.util.List;
 import java.util.Map;

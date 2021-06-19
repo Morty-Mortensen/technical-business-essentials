@@ -1,8 +1,7 @@
 package com.essentials.business.technical.service;
 
-import com.essentials.business.technical.dao.SeleniumDAOFactory;
-import com.essentials.business.technical.dao.interfaces.DAOFactory;
-import com.essentials.business.technical.dao.interfaces.IFortuneFivehundredDao;
+import com.essentials.business.technical.dao.factory.DAOFactory;
+import com.essentials.business.technical.dao.IFortuneFivehundredDao;
 
 import java.util.List;
 import java.util.Map;

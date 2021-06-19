@@ -1,13 +1,11 @@
 package com.essentials.business.technical.dao;
 
-import com.essentials.business.technical.dao.interfaces.IFortuneFivehundredDao;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

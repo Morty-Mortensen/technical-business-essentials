@@ -35,6 +35,9 @@ public class ServerResponse {
 
     private static void sendStatusToClient(int statusCode, HttpExchange exchange) throws IOException {
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
+        exchange.getResponseHeaders().add("Access-Control-Max-Age", "3600");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "*");
         exchange.sendResponseHeaders(statusCode, 0);
     }
 }

@@ -1,6 +1,6 @@
 package com.essentials.business.technical.handler;
 
-import com.essentials.business.technical.dao.SeleniumDAOFactory;
+import com.essentials.business.technical.dao.factory.SeleniumDAOFactory;
 import com.essentials.business.technical.service.FortuneFivehundredService;
 import com.essentials.business.technical.utils.ServerResponse;
 import com.sun.net.httpserver.Headers;
@@ -17,8 +17,10 @@ public class FortuneFIvehundredCompaniesHandler implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         try {
             Headers headers = httpExchange.getRequestHeaders();
-//            List<String> years = headers.get("dateRange");
-            List<String> years = Arrays.asList("2020", "2021");
+            List<String> years = Arrays.asList(headers.get("years").get(0).split(","));
+            System.out.println("Years: ");
+            System.out.println(years);
+//            List<String> years = Arrays.asList("2020", "2021");
             FortuneFivehundredService service = getFortuneFivehundredService();
             Map<String, String> companiesUrlsByYear = service.getCompaniesUrls(years);
 
