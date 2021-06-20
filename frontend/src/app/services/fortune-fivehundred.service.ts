@@ -24,11 +24,10 @@ export class FortuneFivehundredService {
   }
 
   public getCompanyUrls(years: string[]) {
-    let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.append("years", years);
-    // httpHeaders = httpHeaders.append("Access-Control-Request-Headers", "*");
     return this.http.get<any>(this.baseUrl, {
-      headers: httpHeaders
+      params: {
+        years: String(years)
+      }
     })
       .pipe(
         map(response => {

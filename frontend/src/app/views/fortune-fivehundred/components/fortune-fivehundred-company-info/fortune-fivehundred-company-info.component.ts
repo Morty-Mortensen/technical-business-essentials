@@ -11,7 +11,7 @@ import {DateFormatterService} from "../../../../services/date-formatter.service"
 export class FortuneFivehundredCompanyInfoComponent implements OnInit {
 
   public dateRange: DateRange | undefined;
-  public companies: any[] = [];
+  public companies: Record<string, any[]> = {};
   public loading: boolean = false;
 
   constructor(private fortuneFivehundredService: FortuneFivehundredService) {
@@ -34,14 +34,18 @@ export class FortuneFivehundredCompanyInfoComponent implements OnInit {
       this.loading = true;
       this.fortuneFivehundredService.getCompanyUrls(years)
         .subscribe(urlByYear => {
-          console.log(urlByYear);
-          // urls.forEach((url: string) => {
-          //   this.fortuneFivehundredService.getCompanies(url)
-          //     .subscribe(company => {
-          //       this.companies.push(company);
-          //     })
-          // })
+          years = Object.keys(urlByYear);
+          years.forEach((year) => {
+            this.fortuneFivehundredService.getCompanies(urlByYear[year])
+              .subscribe(company => {
+                this.companies[year] = company;
+                console.log(year)
+                console.log(company)
+              })
+          })
         })
+    } else {
+      alert("Please select a date range :)")
     }
   }
 
