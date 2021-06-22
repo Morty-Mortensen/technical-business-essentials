@@ -3,13 +3,8 @@ build/client
 build/server
 .DS_Store
 
-
-# Created by https://www.toptal.com/developers/gitignore/api/gradle
-# Edit at https://www.toptal.com/developers/gitignore?templates=gradle
-
 ### Gradle ###
 .gradle
-build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -19,11 +14,3 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
-
-# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-# gradle/wrapper/gradle-wrapper.properties
-
-### Gradle Patch ###
-**/build/
-
-# End of https://www.toptal.com/developers/gitignore/api/gradle
