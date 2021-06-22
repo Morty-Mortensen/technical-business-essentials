@@ -8,8 +8,8 @@ phases:
   build:
     commands:
       - echo "Entered build phase"
-      - /bin/bash ./build/frontendBuild.sh
-      - /bin/bash ./build/backendBuild.sh
+      - /bin/bash ./build/clientBuild.sh
+      - /bin/bash ./build/serverBuild.sh
   post_build:
     commands:
       - echo "Entering the post-build phase"
@@ -18,8 +18,8 @@ artifacts:
     client:
       files:
         - '**/*'
-      base-directory: ./build/frontend
+      base-directory: ./build/client
     server:
       files:
         - '**/*'
-      base-directory: ./build/backend
+      base-directory: ./build/server
