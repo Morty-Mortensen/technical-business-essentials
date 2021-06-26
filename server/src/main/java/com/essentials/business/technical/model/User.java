@@ -1,6 +1,5 @@
 package com.essentials.business.technical.model;
 
-import com.essentials.business.technical.Laptop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -13,9 +12,9 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @Autowired // Searches for component by class type.
-    @Qualifier("lap1") // Searches for named component
-    private Laptop laptop;
+//    @Autowired // Searches for component by class type.
+//    @Qualifier("lap1") // Searches for named component
+//    private Laptop laptop;
 
     public String getUsername() {
         return username;
