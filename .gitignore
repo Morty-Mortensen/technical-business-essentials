@@ -1,4 +1,6 @@
 .idea
-build/frontend
-build/backend
+build/client
+build/server
 .DS_Store
+.gradle
+technicalbusinessessentials.pem
