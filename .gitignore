@@ -2,6 +2,5 @@
 build/client
 build/server
 .DS_Store
-.gradle
 technicalbusinessessentials.pem
 chromedriver
