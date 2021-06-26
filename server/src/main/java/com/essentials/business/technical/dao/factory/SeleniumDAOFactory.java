@@ -7,18 +7,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.logging.Level;
 
 @Component
-@Qualifier("SeleniumDaoFactory")
 public class SeleniumDAOFactory implements DAOFactory {
     private final WebDriver driver;
 
     public SeleniumDAOFactory() {
-        System.setProperty("webdriver.chrome.driver", "backend/src/main/resources/chromedriver");
+        String chromeDriverLocation = "chromedriver";
+        System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
         ChromeOptions options = new ChromeOptions();
         LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.PERFORMANCE, Level.ALL);

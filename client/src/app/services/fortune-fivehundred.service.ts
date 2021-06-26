@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import DateRange from "../models/date-range";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 
@@ -9,7 +8,8 @@ import {map} from "rxjs/operators";
 })
 export class FortuneFivehundredService {
 
-  private baseUrl = 'http://localhost:8080/api/fortunefivehundred/companies/years'
+  // private baseUrl = 'http://localhost:8080/fortunefivehundred/companies'
+  private baseUrl = 'http://ec2-user@ec2-54-219-136-197.us-west-1.compute.amazonaws.com:8080/fortunefivehundred/companies'
 
   constructor(private http: HttpClient) {
   }
@@ -24,10 +24,8 @@ export class FortuneFivehundredService {
   }
 
   public getCompanyUrls(years: string[]) {
-    return this.http.get<any>(this.baseUrl, {
-      params: {
-        years: String(years)
-      }
+    return this.http.post<any>(this.baseUrl, {
+      years: years
     })
       .pipe(
         map(response => {

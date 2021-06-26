@@ -1,21 +1,20 @@
 package com.essentials.business.technical.controller;
 
 import com.essentials.business.technical.dao.factory.SeleniumDAOFactory;
+import com.essentials.business.technical.model.request.FortuneFivehundredCompanyYearsRequest;
 import com.essentials.business.technical.service.FortuneFivehundredService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 public class FortuneFivehundredController {
 
     @PostMapping("fortunefivehundred/companies")
-    public Map<String, String> getCompanies(@RequestBody List<String> years) {
+    public Map<String, String> getCompanies(@RequestBody FortuneFivehundredCompanyYearsRequest fortuneCompanyYears) {
         FortuneFivehundredService service = getFortuneFivehundredService();
-        Map<String, String> companiesUrlsByYear = service.getCompaniesUrls(years);
-
-        return companiesUrlsByYear;
+        return service.getCompaniesUrls(fortuneCompanyYears.getYears());
     }
 
     private FortuneFivehundredService getFortuneFivehundredService() {

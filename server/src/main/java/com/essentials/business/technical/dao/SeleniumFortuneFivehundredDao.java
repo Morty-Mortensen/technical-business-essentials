@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.Logs;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,7 @@ public class SeleniumFortuneFivehundredDao implements IFortuneFivehundredDao {
                 String targetUrl = "";
                 driver.get("https://fortune.com/fortune500/" + year + "/search/");
                 driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                Logs logs = driver.manage().logs();
                 LogEntries les = driver.manage().logs().get(LogType.PERFORMANCE);
                 for (LogEntry le : les) {
                     try {
