@@ -1,6 +1,8 @@
 .idea
-build/client
-build/server
+build/
 .DS_Store
 technicalbusinessessentials.pem
+
+# Version 91.0.4472.101
 chromedriver
+buildspec.yml
