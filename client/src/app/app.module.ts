@@ -27,6 +27,8 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {HttpClientModule} from "@angular/common/http";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
+import {TechnicalDialogComponent} from './components/technical-dialog/technical-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import {MatTableModule} from "@angular/material/table";
     FortuneFivehundredCompanyInfoComponent,
     SubHeaderComponent,
     DatepickerRangeComponent,
+    TechnicalDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import {MatTableModule} from "@angular/material/table";
     MatIconModule,
     MatPaginatorModule,
     MatTableModule,
+    MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,

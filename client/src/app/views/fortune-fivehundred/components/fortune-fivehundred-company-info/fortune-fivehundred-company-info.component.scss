@@ -1,5 +1,6 @@
 .fortune-fivehundred-companies-info {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -28,4 +29,19 @@
   color: whitesmoke;
   border-radius: 20px;
   width: 50%;
+}
+
+.fortune-fivehundred-table {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
 }

@@ -8,6 +8,8 @@ import {
 } from "../../../../models/fortune-fivehundred-company-info";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
+import {MatDialog} from "@angular/material/dialog";
+import {TechnicalDialogComponent} from "../../../../components/technical-dialog/technical-dialog.component";
 
 @Component({
   selector: 'app-fortune-fivehundred-company-info',
@@ -49,7 +51,7 @@ export class FortuneFivehundredCompanyInfoComponent implements OnInit {
   ];
   public loading: boolean = false;
 
-  constructor(private fortuneFivehundredService: FortuneFivehundredService) {
+  constructor(private fortuneFivehundredService: FortuneFivehundredService, public dialog: MatDialog) {
   }
 
   public testData: FortuneFiveHundredCompanyInfoRow[] = [{
@@ -185,5 +187,17 @@ export class FortuneFivehundredCompanyInfoComponent implements OnInit {
     }
 
     console.log(this.displayCompany);
+  }
+
+  public openDialog(row: FortuneFiveHundredCompanyInfoRow): void {
+    const dialog = this.dialog.open(TechnicalDialogComponent, {
+      width: '800px',
+      data: {name: row.company, animal: 'Dog'}
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 }
