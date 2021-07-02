@@ -52,7 +52,35 @@ export class FortuneFivehundredCompanyInfoComponent implements OnInit {
   constructor(private fortuneFivehundredService: FortuneFivehundredService) {
   }
 
-  public dataSource = new MatTableDataSource<FortuneFiveHundredCompanyInfoRow>([]);
+  public testData: FortuneFiveHundredCompanyInfoRow[] = [{
+    rank: "1",
+    revenues: "559151", // ($M)
+    revenuePercentChange: "9.2",
+    profits: "25242452", // ($M)
+    profitsPercentChange: "2.3",
+    assets: "24524",
+    marketValue: "2352556", // As of March 31, 2021 ($M)
+    changeInRank1000: "20",
+    employees: "23000000",
+    changeInRank500: "10",
+    measureUpRank: "20",
+    company: "Walmart",
+    sector: "Retailing",
+    industry: "General Merchandisers",
+    headquartersCity: "Bentonville",
+    headquartersState: "AR",
+    gainedInRank: "no",
+    droppedInRank: "no",
+    newcomerToTheFortune500: "no",
+    profitable: "yes",
+    founderIsCEO: "no",
+    femaleCEO: "no",
+    growthInJobs: "yes",
+    global500: "yes",
+    bestCompanies: "yes",
+    measureUp: "yes",
+  }];
+  public dataSource = new MatTableDataSource<FortuneFiveHundredCompanyInfoRow>(this.testData);
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
