@@ -8,8 +8,9 @@ import {map} from "rxjs/operators";
 })
 export class FortuneFivehundredService {
 
-  // private baseUrl = 'http://localhost:8080/fortunefivehundred/companies'
-  private baseUrl = 'http://ec2-user@ec2-54-219-136-197.us-west-1.compute.amazonaws.com:8080/fortunefivehundred/companies'
+  private baseUrl = 'http://localhost:8080/fortunefivehundred/companies'
+
+  //private baseUrl = 'http://ec2-user@ec2-54-219-136-197.us-west-1.compute.amazonaws.com:8080/fortunefivehundred/companies'
 
   constructor(private http: HttpClient) {
   }

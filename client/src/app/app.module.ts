@@ -25,6 +25,8 @@ import {DatepickerRangeComponent} from './components/datepicker-range/datepicker
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {HttpClientModule} from "@angular/common/http";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import {HttpClientModule} from "@angular/common/http";
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatPaginatorModule,
+    MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
