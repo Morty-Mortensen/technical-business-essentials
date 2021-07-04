@@ -1,12 +1,9 @@
-package com.essentials.business.technical.dao;
+package com.essentials.business.technical.dao.selenium;
 
 import org.json.JSONObject;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.Logs;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -14,15 +11,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+@Component
+public class SeleniumFortuneFiveHundredDao extends SeleniumBaseDAO {
 
-public class SeleniumFortuneFivehundredDao implements IFortuneFivehundredDao {
-    private final WebDriver driver;
-
-    public SeleniumFortuneFivehundredDao(WebDriver driver) {
-        this.driver = driver;
+    public SeleniumFortuneFiveHundredDao() {
+        super();
     }
 
-    @Override
     public Map<String, String> getCompanyUrls(List<String> years) {
         Map<String, String> urlsByYear = new HashMap<>();
         try {
@@ -30,7 +25,6 @@ public class SeleniumFortuneFivehundredDao implements IFortuneFivehundredDao {
                 String targetUrl = "";
                 driver.get("https://fortune.com/fortune500/" + year + "/search/");
                 driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-                Logs logs = driver.manage().logs();
                 LogEntries les = driver.manage().logs().get(LogType.PERFORMANCE);
                 for (LogEntry le : les) {
                     try {

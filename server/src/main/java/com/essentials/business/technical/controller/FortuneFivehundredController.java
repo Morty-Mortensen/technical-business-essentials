@@ -1,8 +1,8 @@
 package com.essentials.business.technical.controller;
 
-import com.essentials.business.technical.dao.factory.SeleniumDAOFactory;
+import com.essentials.business.technical.dao.selenium.SeleniumFortuneFiveHundredDao;
 import com.essentials.business.technical.model.request.FortuneFivehundredCompanyYearsRequest;
-import com.essentials.business.technical.service.FortuneFivehundredService;
+import com.essentials.business.technical.service.FortuneFiveHundredService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -13,12 +13,12 @@ public class FortuneFivehundredController {
 
     @PostMapping("fortunefivehundred/companies")
     public Map<String, String> getCompanies(@RequestBody FortuneFivehundredCompanyYearsRequest fortuneCompanyYears) {
-        FortuneFivehundredService service = getFortuneFivehundredService();
+        FortuneFiveHundredService service = getFortuneFivehundredService();
         return service.getCompaniesUrls(fortuneCompanyYears.getYears());
     }
 
-    private FortuneFivehundredService getFortuneFivehundredService() {
-        return new FortuneFivehundredService(new SeleniumDAOFactory());
+    private FortuneFiveHundredService getFortuneFivehundredService() {
+        return new FortuneFiveHundredService(new SeleniumFortuneFiveHundredDao());
     }
 
 }

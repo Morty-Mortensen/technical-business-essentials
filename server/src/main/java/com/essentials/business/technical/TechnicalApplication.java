@@ -9,9 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class TechnicalApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(TechnicalApplication.class, args);
-        User user = context.getBean(User.class);
-        System.out.println(user.getFirstName());
+        SpringApplication.run(TechnicalApplication.class, args);
 
         /**
          * Types of dependency injection objects.
