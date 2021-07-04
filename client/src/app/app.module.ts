@@ -11,7 +11,7 @@ import {MatCardModule} from "@angular/material/card";
 import {LoginComponent} from './views/login/login.component';
 import {RegisterComponent} from './views/register/register.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {CommonModule} from "@angular/common";
+import {CommonModule, CurrencyPipe, DecimalPipe, PercentPipe, TitleCasePipe} from "@angular/common";
 import {HomeComponent} from './views/home/home.component';
 import {MatInputModule} from "@angular/material/input";
 import {InputComponent} from './components/input/input.component';
@@ -29,6 +29,9 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {TechnicalDialogComponent} from './components/technical-dialog/technical-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {HoverClassDirective} from './directive/hover-class.directive';
+import {LoadingComponent} from './components/loading/loading.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -44,6 +47,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     SubHeaderComponent,
     DatepickerRangeComponent,
     TechnicalDialogComponent,
+    HoverClassDirective,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,8 +70,9 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
   ],
-  providers: [],
+  providers: [CurrencyPipe, DecimalPipe, TitleCasePipe, PercentPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

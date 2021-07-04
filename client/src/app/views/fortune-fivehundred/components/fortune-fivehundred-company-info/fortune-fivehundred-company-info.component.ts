@@ -1,107 +1,77 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import DateRange from "../../../../models/date-range";
 import {FortuneFivehundredService} from "../../../../services/fortune-fivehundred.service";
 import {DateFormatterService} from "../../../../services/date-formatter.service";
 import {
   FortuneFiveHundredCompanyInfoColumn,
-  FortuneFiveHundredCompanyInfoRow
 } from "../../../../models/fortune-fivehundred-company-info";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
-import {MatDialog} from "@angular/material/dialog";
-import {TechnicalDialogComponent} from "../../../../components/technical-dialog/technical-dialog.component";
+import {CurrencyPipe, DecimalPipe, TitleCasePipe} from "@angular/common";
+import {isNumeric} from "rxjs/internal-compatibility";
+import {ExcelService} from "../../../../services/excel.service";
+import * as uuid from 'uuid';
+import {LoadingService} from "../../../../services/loading.service";
+
+const BEGIN_YEAR: number = 1996;
 
 @Component({
   selector: 'app-fortune-fivehundred-company-info',
   templateUrl: './fortune-fivehundred-company-info.component.html',
   styleUrls: ['./fortune-fivehundred-company-info.component.scss']
 })
-export class FortuneFivehundredCompanyInfoComponent implements OnInit {
+export class FortuneFivehundredCompanyInfoComponent implements OnInit, AfterViewInit {
 
   public dateRange: DateRange | undefined;
   public companies: Record<string, any[]> = {};
-  public displayCompany: FortuneFiveHundredCompanyInfoRow[] = [];
-  public displayColumns: string[] = [
-    "Rank",
-    "Revenues ($M)",
-    "Revenue Percent Change",
-    "Profits ($M)",
-    "Profits Percent Change",
-    "Assets ($M)",
-    "Market Value — as of March 31, 2021 ($M)",
-    "Change in Rank (Full 1000)",
-    "Employees",
-    "Change in Rank (500 only)",
-    "Measure Up Rank",
-    "Company",
-    "Sector",
-    "Industry",
-    "Headquarters City",
-    "Headquarters State",
-    "Gained in Rank",
-    "Dropped in Rank",
-    "Newcomer to the Fortune 500",
-    "Profitable",
-    "Founder is CEO",
-    "Female CEO",
-    "Growth in Jobs",
-    "Global 500",
-    "Best Companies",
-    "Measure Up"
-  ];
+  public displayYear: string = '';
+  public allYears: string[] = [];
+  public displayCompany: any[] = [];
+  public displayColumns: string[] = []
+  public displayKeyColumns: string[] = []
+  public columns: Record<string, string[]> = {};
   public loading: boolean = false;
+  public currYear: number = new Date().getFullYear();
 
-  constructor(private fortuneFivehundredService: FortuneFivehundredService, public dialog: MatDialog) {
+  constructor(private fortuneFivehundredService: FortuneFivehundredService,
+              private decimalPipe: DecimalPipe,
+              private currencyPipe: CurrencyPipe,
+              private titleCasePipe: TitleCasePipe,
+              private excelService: ExcelService,
+              private loadingService: LoadingService) {
   }
 
-  public testData: FortuneFiveHundredCompanyInfoRow[] = [{
-    rank: "1",
-    revenues: "559151", // ($M)
-    revenuePercentChange: "9.2",
-    profits: "25242452", // ($M)
-    profitsPercentChange: "2.3",
-    assets: "24524",
-    marketValue: "2352556", // As of March 31, 2021 ($M)
-    changeInRank1000: "20",
-    employees: "23000000",
-    changeInRank500: "10",
-    measureUpRank: "20",
-    company: "Walmart",
-    sector: "Retailing",
-    industry: "General Merchandisers",
-    headquartersCity: "Bentonville",
-    headquartersState: "AR",
-    gainedInRank: "no",
-    droppedInRank: "no",
-    newcomerToTheFortune500: "no",
-    profitable: "yes",
-    founderIsCEO: "no",
-    femaleCEO: "no",
-    growthInJobs: "yes",
-    global500: "yes",
-    bestCompanies: "yes",
-    measureUp: "yes",
-  }];
-  public dataSource = new MatTableDataSource<FortuneFiveHundredCompanyInfoRow>(this.testData);
+  public dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-
-  ngAfterViewInit() {
-    if (this.paginator !== undefined) {
-      console.log("Paginator here!")
-
-    }
-
-  }
 
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+    // Initialize paginator.
+    if (this.paginator !== undefined) {
+      this.dataSource.paginator = this.paginator;
+    }
+  }
+
   public submit(): void {
     if (this.dateRange !== undefined) {
-
       const startYear = DateFormatterService.dateToYear(this.dateRange.start);
       const endYear = DateFormatterService.dateToYear(this.dateRange.end);
+
+      if (startYear < BEGIN_YEAR) {
+        alert("Please select a start year after " + (BEGIN_YEAR - 1));
+        return;
+      }
+
+      if (endYear > this.currYear) {
+        alert("Please select a end year before or including this year (" + this.currYear + ").");
+        return;
+      }
+
+      this.loadingService.start();
+      this.displayYear = String(endYear);
 
       let years: string[] = [];
       for (let year = startYear; year <= endYear; year++) {
@@ -111,93 +81,130 @@ export class FortuneFivehundredCompanyInfoComponent implements OnInit {
       this.loading = true;
       this.fortuneFivehundredService.getCompanyUrls(years)
         .subscribe(urlByYear => {
-          years = Object.keys(urlByYear);
-          years.forEach((year) => {
+          this.allYears = Object.keys(urlByYear);
+          this.allYears.sort((a, b) => Number(b) - Number(a));
+          this.allYears.forEach((year) => {
             this.fortuneFivehundredService.getCompanies(urlByYear[year])
               .subscribe(company => {
 
-                if (Object.keys(this.companies).length <= 0) {
+                if (this.displayYear === year) {
                   this.processCompany(company);
                 }
-
                 this.companies[year] = company;
+                this.columns[year] = this.processColumns(company);
               })
           })
+          this.loadingService.stop();
         })
     } else {
       alert("Please select a date range :)")
     }
   }
 
+  private processColumns(company: any) {
+    let columns: any[] = []
+
+    const firstColumns = company[0].sortable;
+    firstColumns.forEach((column: FortuneFiveHundredCompanyInfoColumn) => {
+      columns.push(column.title);
+    })
+    const secondColumns = company[0].filterable;
+    secondColumns.forEach((column: FortuneFiveHundredCompanyInfoColumn) => {
+      columns.push(column.title);
+    })
+
+    return columns;
+  }
+
   public processCompany(company: any) {
     this.displayCompany = [];
+    this.displayColumns = [];
 
     // Get Columns
-    // if (this.displayColumns.length <= 0) {
-    //   const firstColumns = company[0].sortable;
-    //   firstColumns.forEach((column: FortuneFiveHundredCompanyInfoColumn) => {
-    //     this.displayColumns.push(column.title);
-    //   })
-    //   const secondColumns = company[0].filterable;
-    //   secondColumns.forEach((column: FortuneFiveHundredCompanyInfoColumn) => {
-    //     this.displayColumns.push(column.title);
-    //   })
-    // }
-    //
-    // console.log(this.displayColumns)
+    if (this.displayColumns.length <= 0) {
+      this.displayColumns = this.processColumns(company);
+    }
 
     // Companies info
     const companies = company[1].items;
     companies.forEach((companyInfo: any) => {
-      this.displayCompany.push({
-        rank: companyInfo.fields[0].value,
-        revenues: companyInfo.fields[1].value,
-        revenuePercentChange: companyInfo.fields[2].value,
-        profits: companyInfo.fields[3].value,
-        profitsPercentChange: companyInfo.fields[4].value,
-        assets: companyInfo.fields[5].value,
-        marketValue: companyInfo.fields[6].value,
-        changeInRank1000: companyInfo.fields[7].value,
-        employees: companyInfo.fields[8].value,
-        changeInRank500: companyInfo.fields[9].value,
-        measureUpRank: companyInfo.fields[10].value,
-        company: companyInfo.fields[11].value,
-        sector: companyInfo.fields[12].value,
-        industry: companyInfo.fields[13].value,
-        headquartersCity: companyInfo.fields[14].value,
-        headquartersState: companyInfo.fields[15].value,
-        gainedInRank: companyInfo.fields[16].value,
-        droppedInRank: companyInfo.fields[17].value,
-        newcomerToTheFortune500: companyInfo.fields[18].value,
-        profitable: companyInfo.fields[19].value,
-        founderIsCEO: companyInfo.fields[20].value,
-        femaleCEO: companyInfo.fields[21].value,
-        growthInJobs: companyInfo.fields[22].value,
-        global500: companyInfo.fields[23].value,
-        bestCompanies: companyInfo.fields[24].value,
-        measureUp: companyInfo.fields[25].value
-      } as FortuneFiveHundredCompanyInfoRow)
+      const rowData = this.reduceToRowData(companyInfo.fields);
+
+      // Get columns
+      if (this.displayCompany.length <= 0) {
+        this.displayKeyColumns = Object.keys(rowData);
+      }
+      this.displayCompany.push(rowData);
     })
 
-    this.displayCompany.sort((a, b) => Number(a.rank) - parseFloat(b.rank));
+    // Sort company info by rank
+    this.displayCompany.sort((a, b) => Number(a.rank) - Number(b.rank));
 
+
+    // Display company info.
     if (this.paginator !== undefined) {
-      this.dataSource = new MatTableDataSource<FortuneFiveHundredCompanyInfoRow>(this.displayCompany);
+      this.dataSource = new MatTableDataSource<any>(this.displayCompany);
       this.dataSource.paginator = this.paginator;
     }
-
-    console.log(this.displayCompany);
   }
 
-  public openDialog(row: FortuneFiveHundredCompanyInfoRow): void {
-    const dialog = this.dialog.open(TechnicalDialogComponent, {
-      width: '800px',
-      data: {name: row.company, animal: 'Dog'}
+  public yearSelected(year: string): void {
+    this.displayYear = year;
+    this.processCompany(this.companies[year]);
+  }
+
+  public exportAllData(): void {
+    this.allYears.forEach((year) => {
+      this.exportData(this.companies[year], year);
+    })
+  }
+
+  public exportData(companies: any[] = this.companies[this.displayYear], year: string = this.displayYear): void {
+
+    // Format Data.
+    let dataToExport: any[] = [];
+    companies[1].items.forEach((companyInfo: any) => {
+      dataToExport.push(this.reduceToRowData(companyInfo.fields, true, this.columns[year]));
     });
 
-    dialog.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
+    dataToExport.sort((a, b) => Number(a.Rank) - Number(b.Rank));
+
+    // Export Data.
+    this.excelService.exportAsExcelFile(dataToExport, year + '_fortune_fivehundred_' + uuid.v4());
+  }
+
+  private reduceToRowData(fields: any[], prettier = false, columns: string[] = []) {
+    return fields.reduce((allFields: any, field: any, index: number) => {
+      if (prettier) {
+        allFields[columns[index] || this.titleCasePipe.transform(field.key)] = this.formatCell(field.value, columns[index] || '');
+      } else {
+        allFields[field.key] = field.value;
+      }
+
+      return allFields;
+    }, {});
+  }
+
+  public formatCell(cell: string, columnName: string): string {
+    if (cell === '') {
+      cell = '0'; // Default to zero.
+    }
+
+    const isPercent = columnName.toLowerCase().includes("percent");
+    const isRank = columnName.toLowerCase().includes("rank");
+    if (isPercent) {
+      // console.log(columnName)
+      // console.log(cell)
+      cell = this.decimalPipe.transform(cell) || '';
+      return cell + '%';
+    } else if (isNumeric(cell) && !isRank) {
+      return this.currencyPipe.transform(cell) || '';
+    } else {
+      return cell; // No formatting necessary.
+    }
+  }
+
+  public formatHeaderCell(headerCell: string): string {
+    return this.titleCasePipe.transform(headerCell);
   }
 }

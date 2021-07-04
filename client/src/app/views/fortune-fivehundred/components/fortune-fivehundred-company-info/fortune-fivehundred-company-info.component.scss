@@ -32,16 +32,58 @@
 }
 
 .fortune-fivehundred-table {
-  width: 100%;
+  max-width: 70%;
+  max-height: 500px;
+  overflow: auto;
   margin-top: 25px;
+}
+
+.fortune-fivehundred-years-container {
+  position: absolute;
+  left: 50px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  vertical-align: center;
+  max-height: 480px;
+  overflow: auto;
+}
+
+.fortune-fivehundred-years {
+  margin: 25px 0 44px 0;
 }
 
 .mat-row .mat-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
-  cursor: pointer;
+}
+
+.mat-table {
+  display: table;
+
+  > .mat-header-row, > .mat-row {
+    display: table-row;
+
+    > .mat-header-cell, > .mat-cell {
+      display: table-cell;
+      height: 48px;
+      vertical-align: middle;
+
+    }
+  }
+}
+
+.mat-header-cell, .mat-cell {
+  padding: 10px;
+  text-align: center;
+}
+
+.mat-header-cell {
+  font-weight: bold !important;
 }
 
 .mat-row:hover .mat-cell {
   border-color: currentColor;
 }
+
+

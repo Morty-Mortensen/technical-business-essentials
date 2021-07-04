@@ -1,7 +1,7 @@
 <div class="fortune-fivehundred-companies-info">
   <mat-card>
     <mat-card-header class="fortune-fivehundred-card-header">
-      <mat-card-title>Fortune 500 Companies</mat-card-title>
+      <mat-card-title>Fortune 500 Companies (1996 - {{currYear}})</mat-card-title>
     </mat-card-header>
     <div class="fortune-fivehundred-card">
       <app-datepicker-range
@@ -15,149 +15,37 @@
     </div>
   </mat-card>
 
-  <div class="mat-elevation-z8 fortune-fivehundred-table">
+  <div [hidden]="displayCompany.length <= 0"
+       class="mat-elevation-z8 fortune-fivehundred-table">
+    <div class="mat-elevation-z3 primary-background fortune-fivehundred-years-container">
+      <h2 class="fortune-fivehundred-years">Years</h2>
+      <hr/>
+      <ng-container *ngFor="let year of allYears">
+        <button *ngIf="year === displayYear" class="secondary" mat-button>{{year}}</button>
+        <button hover-class="secondary" *ngIf="year !== displayYear" (click)="yearSelected(year)"
+                mat-button>{{year}}</button>
+        <br/>
+      </ng-container>
+      <hr/>
+      <button hover-class="secondary" (click)="exportData()" mat-button>Export Selected</button>
+      <br/>
+      <button hover-class="secondary" (click)="exportAllData()" mat-button>Export All</button>
+      <br/>
+    </div>
+
     <table mat-table [dataSource]="dataSource">
-
-      <!-- Position Column -->
-      <ng-container matColumnDef="{{displayColumns[0]}}">
-        <th mat-header-cell *matHeaderCellDef> Rank</th>
-        <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
+      <ng-container *ngFor="let keyCol of displayKeyColumns; let i = index"
+                    matColumnDef="{{keyCol}}">
+        <th mat-header-cell *matHeaderCellDef>
+          <p *ngIf="displayColumns[i] !== undefined">{{displayColumns[i]}}</p>
+          <p *ngIf="displayColumns[i] === undefined">{{formatHeaderCell(keyCol)}}</p>
+        </th>
+        <td mat-cell *matCellDef="let element"> {{formatCell(element[keyCol], displayColumns[i] || '')}} </td>
       </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="{{displayColumns[1]}}">
-        <th mat-header-cell *matHeaderCellDef> Revenue</th>
-        <td mat-cell *matCellDef="let element"> {{element.revenues}} </td>
-      </ng-container>
-
-      <!-- Weight Column -->
-      <ng-container matColumnDef="{{displayColumns[2]}}">
-        <th mat-header-cell *matHeaderCellDef> Revenue % Change</th>
-        <td mat-cell *matCellDef="let element"> {{element.revenuePercentChange}} </td>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="{{displayColumns[3]}}">
-        <th mat-header-cell *matHeaderCellDef> Profits</th>
-        <td mat-cell *matCellDef="let element"> {{element.profits}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[4]}}">
-        <th mat-header-cell *matHeaderCellDef> Profits % Change</th>
-        <td mat-cell *matCellDef="let element"> {{element.profitsPercentChange}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[5]}}">
-        <th mat-header-cell *matHeaderCellDef> Assets</th>
-        <td mat-cell *matCellDef="let element"> {{element.assets}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[6]}}">
-        <th mat-header-cell *matHeaderCellDef> Market Value</th>
-        <td mat-cell *matCellDef="let element"> {{element.marketValue}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[7]}}">
-        <th mat-header-cell *matHeaderCellDef> Change In Rank (1000)</th>
-        <td mat-cell *matCellDef="let element"> {{element.changeInRank500}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[8]}}">
-        <th mat-header-cell *matHeaderCellDef> Employees</th>
-        <td mat-cell *matCellDef="let element"> {{element.employees}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[9]}}">
-        <th mat-header-cell *matHeaderCellDef> Change In Rank (500)</th>
-        <td mat-cell *matCellDef="let element"> {{element.changeInRank500}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[10]}}">
-        <th mat-header-cell *matHeaderCellDef> Measure Up Rank</th>
-        <td mat-cell *matCellDef="let element"> {{element.measureUpRank}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[11]}}">
-        <th mat-header-cell *matHeaderCellDef> Company</th>
-        <td mat-cell *matCellDef="let element"> {{element.company}} </td>
-      </ng-container>
-      <ng-container matColumnDef="{{displayColumns[12]}}">
-        <th mat-header-cell *matHeaderCellDef> Sector</th>
-        <td mat-cell *matCellDef="let element"> {{element.sector}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[13]}}">
-        <th mat-header-cell *matHeaderCellDef> Industry</th>
-        <td mat-cell *matCellDef="let element"> {{element.industry}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[14]}}">
-        <th mat-header-cell *matHeaderCellDef> Headquarters City</th>
-        <td mat-cell *matCellDef="let element"> {{element.headquartersCity}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[15]}}">
-        <th mat-header-cell *matHeaderCellDef> Headquarters State</th>
-        <td mat-cell *matCellDef="let element"> {{element.headquartersState}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[16]}}">
-        <th mat-header-cell *matHeaderCellDef> Gained In Rank</th>
-        <td mat-cell *matCellDef="let element"> {{element.gainedInRank}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[17]}}">
-        <th mat-header-cell *matHeaderCellDef> Dropped In Rank</th>
-        <td mat-cell *matCellDef="let element"> {{element.droppedInRank}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[18]}}">
-        <th mat-header-cell *matHeaderCellDef> Newcomer To The Fortune 500</th>
-        <td mat-cell *matCellDef="let element"> {{element.newcomerToTheFortune500}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[19]}}">
-        <th mat-header-cell *matHeaderCellDef> Profitable</th>
-        <td mat-cell *matCellDef="let element"> {{element.profitable}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[20]}}">
-        <th mat-header-cell *matHeaderCellDef> Founder Is CEO</th>
-        <td mat-cell *matCellDef="let element"> {{element.founderIsCEO}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[21]}}">
-        <th mat-header-cell *matHeaderCellDef> Female CEO</th>
-        <td mat-cell *matCellDef="let element"> {{element.femaleCEO}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[22]}}">
-        <th mat-header-cell *matHeaderCellDef> Growth In Jobs</th>
-        <td mat-cell *matCellDef="let element"> {{element.growthInJobs}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[23]}}">
-        <th mat-header-cell *matHeaderCellDef> Global 500</th>
-        <td mat-cell *matCellDef="let element"> {{element.global500}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[24]}}">
-        <th mat-header-cell *matHeaderCellDef> Best Companies</th>
-        <td mat-cell *matCellDef="let element"> {{element.bestCompanies}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="{{displayColumns[25]}}">
-        <th mat-header-cell *matHeaderCellDef> Measure Up</th>
-        <td mat-cell *matCellDef="let element"> {{element.measureUp}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
-      <tr
-        mat-row
-        (click)="openDialog(row)"
-        *matRowDef="let row; columns: displayColumns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayKeyColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayKeyColumns;"></tr>
     </table>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
   </div>
 </div>

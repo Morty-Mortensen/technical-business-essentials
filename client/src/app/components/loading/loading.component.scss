@@ -1,0 +1,18 @@
+.loading-spinner-container {
+  position: absolute;
+  opacity: 0.5;
+  background-color: lightgray;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+
+.loading-spinner {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
+}

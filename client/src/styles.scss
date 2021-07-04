@@ -24,6 +24,10 @@ $warn: mat-define-palette($mat-red);
   color: mat-color($primary, text) !important;
 }
 
+.secondary {
+  color: mat-color($accent, text) !important;
+}
+
 
 .primary-background {
   background-color: mat-color($primary, default) !important;
