@@ -1,27 +1,34 @@
 package com.essentials.business.technical.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-@Component
-@Scope(value = "prototype")
 public class User {
-    private String username;
+    private String email;
     private String firstName;
     private String lastName;
+    private String password;
 
-//    @Autowired // Searches for component by class type.
-//    @Qualifier("lap1") // Searches for named component
-//    private Laptop laptop;
-
-    public String getUsername() {
-        return username;
+    public User() {
+        
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public User(String email, String firstName, String lastName) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -38,5 +45,13 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

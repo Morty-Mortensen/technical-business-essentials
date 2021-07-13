@@ -6,7 +6,7 @@
     <div class="login-card">
       <app-input
         [label]="'Username'"
-        (output)="username = $event">
+        (output)="email = $event">
       </app-input>
       <app-input
         [label]="'Password'"
@@ -19,7 +19,8 @@
           [ngClass]="!isValid() ? 'login-button-disabled' : 'primary-background'"
           class="login-button"
           mat-button
-          [disabled]="!isValid()">Submit
+          [disabled]="!isValid()"
+          (click)="login()">Submit
         </button>
       </div>
     </div>

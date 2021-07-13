@@ -5,6 +5,15 @@
     </mat-card-header>
     <div class="register-card">
       <app-input
+        [label]="'Email'"
+        (output)="email = $event">
+      </app-input>
+      <app-input
+        [label]="'Password'"
+        [type]="'password'"
+        (output)="password = $event">
+      </app-input>
+      <app-input
         [label]="'First Name'"
         (output)="firstName = $event">
       </app-input>
@@ -12,22 +21,14 @@
         [label]="'Last Name'"
         (output)="lastName = $event">
       </app-input>
-      <app-input
-        [label]="'Username'"
-        (output)="username = $event">
-      </app-input>
-      <app-input
-        [label]="'Password'"
-        [type]="'password'"
-        (output)="password = $event">
-      </app-input>
       <div
         class="register-button-container">
         <button
           [ngClass]="!isValid() ? 'register-button-disabled' : 'primary-background'"
           class="register-button"
           mat-button
-          [disabled]="!isValid()">Submit
+          [disabled]="!isValid()"
+          (click)="register()">Submit
         </button>
       </div>
     </div>

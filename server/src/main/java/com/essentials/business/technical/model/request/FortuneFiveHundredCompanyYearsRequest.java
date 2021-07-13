@@ -1,9 +1,8 @@
 package com.essentials.business.technical.model.request;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class FortuneFivehundredCompanyYearsRequest {
+public class FortuneFiveHundredCompanyYearsRequest {
 
     private List<String> years;
 

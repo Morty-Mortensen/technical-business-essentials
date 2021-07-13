@@ -5,11 +5,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
-import org.springframework.stereotype.Component;
 
 import java.util.logging.Level;
 
-@Component
 public class SeleniumBaseDAO implements AutoCloseable {
     private final ChromeOptions options;
     protected WebDriver driver;

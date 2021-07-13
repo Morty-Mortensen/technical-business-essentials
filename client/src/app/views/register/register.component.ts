@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {RegisterService} from "../../services/register.service";
 
 @Component({
   selector: 'app-register',
@@ -9,10 +10,10 @@ export class RegisterComponent implements OnInit {
 
   public firstName: string = '';
   public lastName: string = '';
-  public username: string = '';
+  public email: string = '';
   public password: string = '';
 
-  constructor() {
+  constructor(private registerService: RegisterService) {
   }
 
   ngOnInit(): void {
@@ -21,7 +22,24 @@ export class RegisterComponent implements OnInit {
   public isValid(): boolean {
     return this.firstName !== ''
       && this.lastName !== ''
-      && this.username !== ''
+      && this.email !== ''
       && this.password !== ''
+  }
+
+  public register(): void {
+    this.registerService.register({
+      user: {
+        email: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName
+      },
+      password: this.password
+    }).subscribe(response => {
+      // Insert user into cache.
+      console.log(response);
+      alert("Welcome " + response.firstName);
+    }, error => {
+      alert("An unexpected error occurred :(")
+    })
   }
 }

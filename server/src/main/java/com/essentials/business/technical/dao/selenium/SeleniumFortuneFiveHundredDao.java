@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@Component
 public class SeleniumFortuneFiveHundredDao extends SeleniumBaseDAO {
 
     public SeleniumFortuneFiveHundredDao() {

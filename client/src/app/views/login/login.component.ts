@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-login',
@@ -7,29 +8,32 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  public username: string = '';
+  public email: string = '';
   public password: string = '';
 
-  constructor() {
+  constructor(private loginService: LoginService) {
   }
 
   ngOnInit(): void {
   }
 
   public isValid(): boolean {
-    return this.username !== '' && this.password !== '';
+    return this.email !== '' && this.password !== '';
   }
 
-  async onSubmit(): Promise<void> {
-    try {
-      if (this.isValid()) {
-
+  public login(): void {
+    this.loginService.register({
+      email: this.email,
+      password: this.password
+    }).subscribe(isValid => {
+      if (isValid) {
+        alert("Valid! You have logged in :)");
       } else {
-
+        alert("Invalid...Please try again :(");
       }
-    } catch (ex) {
-
-    }
+    }, error => {
+      alert("No user exists with the given credentials.");
+    })
   }
 
 }
