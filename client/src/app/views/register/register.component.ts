@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {RegisterService} from "../../services/register.service";
+import {CacheService} from "../../services/cache.service";
+import {Router} from "@angular/router";
+import {SnackbarService} from "../../services/snackbar.service";
 
 @Component({
   selector: 'app-register',
@@ -13,7 +16,10 @@ export class RegisterComponent implements OnInit {
   public email: string = '';
   public password: string = '';
 
-  constructor(private registerService: RegisterService) {
+  constructor(private registerService: RegisterService,
+              private cacheService: CacheService,
+              private router: Router,
+              private snackbar: SnackbarService) {
   }
 
   ngOnInit(): void {
@@ -34,10 +40,10 @@ export class RegisterComponent implements OnInit {
         lastName: this.lastName
       },
       password: this.password
-    }).subscribe(response => {
-      // Insert user into cache.
-      console.log(response);
-      alert("Welcome " + response.firstName);
+    }).subscribe(user => {
+      this.cacheService.next(user);
+      this.snackbar.show('Successfully registered!');
+      this.router.navigate(['/']);
     }, error => {
       alert("An unexpected error occurred :(")
     })

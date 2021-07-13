@@ -32,6 +32,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {HoverClassDirective} from './directive/hover-class.directive';
 import {LoadingComponent} from './components/loading/loading.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatNativeDateModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [CurrencyPipe, DecimalPipe, TitleCasePipe, PercentPipe],
   bootstrap: [AppComponent]

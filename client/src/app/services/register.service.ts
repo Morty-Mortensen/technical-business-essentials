@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {map} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
-import {PostUserRequest} from "../models/user";
+import {PostUserRequest, User} from "../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class RegisterService {
 
   public register(request: PostUserRequest) {
     console.log(request);
-    return this.http.post<any>(this.baseUrl, {
+    return this.http.post<User>(this.baseUrl, {
       user: request.user,
       password: request.password
     })

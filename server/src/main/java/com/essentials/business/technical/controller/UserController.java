@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("user/validate")
-    public boolean validateUser(@RequestBody ValidateUserRequest userRequest) throws Exception {
+    public User validateUser(@RequestBody ValidateUserRequest userRequest) throws Exception {
         UserService service = getUserService();
         return service.validateUser(userRequest);
     }

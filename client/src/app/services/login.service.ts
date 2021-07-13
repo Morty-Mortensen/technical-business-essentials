@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ValidateUserRequest} from "../models/user";
+import {User, ValidateUserRequest} from "../models/user";
 import {map} from "rxjs/operators";
 
 @Injectable({
@@ -13,8 +13,8 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
 
-  public register(request: ValidateUserRequest) {
-    return this.http.post<any>(this.baseUrl, {
+  public login(request: ValidateUserRequest) {
+    return this.http.post<User>(this.baseUrl, {
       email: request.email,
       password: request.password
     })

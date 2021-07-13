@@ -12,9 +12,13 @@ public class UserService {
         return UsersDAO.getInstance().post(request);
     }
 
-    public boolean validateUser(ValidateUserRequest request) throws DataAccessException {
+    public User validateUser(ValidateUserRequest request) throws DataAccessException {
         User user = UsersDAO.getInstance().getWithPassword(request.getEmail());
 
-        return request.getPassword().equals(user.getPassword());
+        if (!request.getPassword().equals(user.getPassword())) {
+            throw new RuntimeException("Invalid credentials.");
+        }
+
+        return user;
     }
 }

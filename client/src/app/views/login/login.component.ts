@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../../services/login.service";
+import {CacheService} from "../../services/cache.service";
+import {Router} from "@angular/router";
+import {SnackbarService} from "../../services/snackbar.service";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,10 @@ export class LoginComponent implements OnInit {
   public email: string = '';
   public password: string = '';
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService,
+              private cacheService: CacheService,
+              private router: Router,
+              private snackbar: SnackbarService) {
   }
 
   ngOnInit(): void {
@@ -22,17 +28,15 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
-    this.loginService.register({
+    this.loginService.login({
       email: this.email,
       password: this.password
-    }).subscribe(isValid => {
-      if (isValid) {
-        alert("Valid! You have logged in :)");
-      } else {
-        alert("Invalid...Please try again :(");
-      }
+    }).subscribe(user => {
+      this.cacheService.next(user);
+      this.snackbar.show('Successfully logged in!');
+      this.router.navigate(['/']);
     }, error => {
-      alert("No user exists with the given credentials.");
+      alert("Invalid credentials.");
     })
   }
 
