@@ -33,17 +33,13 @@ public class ErrorHandlerController {
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(HttpUnauthorizedException.class)
-    @ResponseBody
-    ErrorInfo
-    handleUnauthorizedRequest(HttpServletRequest req, Exception ex) {
+    public ErrorInfo handleUnauthorizedRequest(HttpServletRequest req, Exception ex) {
         return new ErrorInfo(req.getRequestURI(), ex);
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(HttpForbiddenException.class)
-    @ResponseBody
-    ErrorInfo
-    handleForbiddenRequest(HttpServletRequest req, Exception ex) {
+    public ErrorInfo handleForbiddenRequest(HttpServletRequest req, Exception ex) {
         return new ErrorInfo(req.getRequestURI(), ex);
     }
 }

@@ -42,6 +42,8 @@ export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
           } else if (ex.status === HttpStatusCode.Forbidden) {
             this.snackbar.show('This content is forbidden. Please log in with admin privileges.')
             this.router.navigate(['/forbidden']);
+          } else if (ex.status === HttpStatusCode.BadRequest) {
+            return new Observable<HttpEvent<any>>(ex);
           } else {
             console.log(ex);
             this.snackbar.show('An unknown exception occurred. Please contact the admin.')

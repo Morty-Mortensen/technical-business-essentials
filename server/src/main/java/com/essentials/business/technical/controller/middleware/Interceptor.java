@@ -7,9 +7,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 public class Interceptor extends WebMvcConfigurerAdapter {
+
+    /**
+     * Adding a new interceptor.
+     *
+     * <p>
+     * 1. Make sure that the error handling url (/error) is added.
+     * 2. Forward calls using ExceptionHandler.forwardException().
+     * <p>
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CacheMiddleware()).excludePathPatterns("/user/validate", "/user", "/error/401");
+        registry.addInterceptor(new CacheMiddleware()).excludePathPatterns("/user/validate", "/user", "/error");
         super.addInterceptors(registry);
     }
 

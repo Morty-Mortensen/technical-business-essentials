@@ -1,10 +1,13 @@
 package com.essentials.business.technical.utils;
 
-import com.essentials.business.technical.controller.exception.HttpException;
-import com.essentials.business.technical.controller.exception.HttpBadRequestException;
-import com.essentials.business.technical.controller.exception.HttpForbiddenException;
-import com.essentials.business.technical.controller.exception.HttpInternalServerErrorException;
-import com.essentials.business.technical.controller.exception.HttpUnauthorizedException;
+import com.essentials.business.technical.controller.exception.*;
+import com.essentials.business.technical.controller.exception.controller.RedirectErrorController;
+import com.essentials.business.technical.controller.middleware.CacheMiddleware;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class ExceptionHandler {
     public static void handleException(HttpException ex) throws Exception {
@@ -20,5 +23,11 @@ public class ExceptionHandler {
             default:
                 throw new Exception("An unknown exception occurred.", ex);
         }
+    }
+
+    public static boolean forwardException(HttpServletRequest request, HttpServletResponse response, String interceptorName, ErrorType type) throws ServletException, IOException {
+        request.setAttribute(RedirectErrorController.REDIRECT_ATTRIBUTE, new HttpException(interceptorName, type));
+        request.getRequestDispatcher("/error").forward(request, response);
+        return false;
     }
 }
