@@ -4,6 +4,9 @@ import java.util.List;
 
 public class FortuneFiveHundredCompanyYearsRequest {
 
+    public FortuneFiveHundredCompanyYearsRequest() {
+    }
+
     private List<String> years;
 
     public List<String> getYears() {

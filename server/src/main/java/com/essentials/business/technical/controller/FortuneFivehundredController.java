@@ -6,6 +6,7 @@ import com.essentials.business.technical.service.FortuneFiveHundredService;
 import com.essentials.business.technical.utils.ExceptionHandler;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @CrossOrigin("http://localhost:4200")

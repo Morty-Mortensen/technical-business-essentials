@@ -5,12 +5,13 @@ import {RegisterComponent} from "./views/register/register.component";
 import {HomeComponent} from "./views/home/home.component";
 import {FortuneFivehundredComponent} from "./views/fortune-fivehundred/fortune-fivehundred.component";
 import {FortuneFivehundredCompanyInfoComponent} from "./views/fortune-fivehundred/components/fortune-fivehundred-company-info/fortune-fivehundred-company-info.component";
+import {ForbiddenComponent} from "./views/forbidden/forbidden.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'forbidden', component: RegisterComponent},
+  {path: 'forbidden', component: ForbiddenComponent},
   {
     path: 'fortune-fivehundred', component: FortuneFivehundredComponent, children: [
       {path: 'companies', component: FortuneFivehundredCompanyInfoComponent}

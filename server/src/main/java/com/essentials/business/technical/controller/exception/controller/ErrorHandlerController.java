@@ -1,4 +1,4 @@
-package com.essentials.business.technical.controller;
+package com.essentials.business.technical.controller.exception.controller;
 
 import com.essentials.business.technical.controller.exception.HttpBadRequestException;
 import com.essentials.business.technical.controller.exception.HttpForbiddenException;
@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@CrossOrigin("http://localhost:4200")
 @RestControllerAdvice
-public class ErrorController {
+public class ErrorHandlerController {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpBadRequestException.class)
@@ -26,15 +25,25 @@ public class ErrorController {
         return new ErrorInfo(req.getRequestURI(), ex);
     }
 
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public ErrorInfo handleUnexpectedRequest(HttpServletRequest req, Exception ex) {
+        return new ErrorInfo(req.getRequestURI(), ex);
+    }
+
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(HttpUnauthorizedException.class)
-    public ErrorInfo handleUnauthorizedRequest(HttpServletRequest req, Exception ex) {
+    @ResponseBody
+    ErrorInfo
+    handleUnauthorizedRequest(HttpServletRequest req, Exception ex) {
         return new ErrorInfo(req.getRequestURI(), ex);
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(HttpForbiddenException.class)
-    public ErrorInfo handleForbiddenRequest(HttpServletRequest req, Exception ex) {
+    @ResponseBody
+    ErrorInfo
+    handleForbiddenRequest(HttpServletRequest req, Exception ex) {
         return new ErrorInfo(req.getRequestURI(), ex);
     }
 }

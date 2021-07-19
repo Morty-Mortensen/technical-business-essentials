@@ -7,10 +7,11 @@ import {User} from "../models/user";
 import {SnackbarService} from "../services/snackbar.service";
 import {HttpStatusCode} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {LoadingService} from "../services/loading.service";
 
 @Injectable()
 export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
-  constructor(private cacheService: CacheService, private snackbar: SnackbarService, private router: Router) {
+  constructor(private cacheService: CacheService, private snackbar: SnackbarService, private router: Router, private loadingService: LoadingService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -33,6 +34,7 @@ export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
           return resp;
         }),
         catchError(ex => {
+          this.loadingService.stop();
           if (ex.status === HttpStatusCode.Unauthorized) {
             this.snackbar.show('Token expired, please log back in.')
             this.cacheService.clearData();

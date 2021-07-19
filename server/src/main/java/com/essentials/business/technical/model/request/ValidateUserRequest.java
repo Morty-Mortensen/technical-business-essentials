@@ -1,8 +1,11 @@
 package com.essentials.business.technical.model.request;
 
 public class ValidateUserRequest {
-    private final String email;
-    private final String password;
+    private String email;
+    private String password;
+
+    public ValidateUserRequest() {
+    }
 
     public ValidateUserRequest(String email, String password) {
         this.email = email;

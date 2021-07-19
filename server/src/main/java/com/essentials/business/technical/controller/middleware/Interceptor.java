@@ -9,8 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class Interceptor extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CacheMiddleware()).excludePathPatterns("/user/validate", "/user", "/error", "error");
-        registry.addInterceptor(new ErrorInterceptor()).addPathPatterns("/error", "error");
+        registry.addInterceptor(new CacheMiddleware()).excludePathPatterns("/user/validate", "/user", "/error/401");
+        super.addInterceptors(registry);
     }
 
     @Override
