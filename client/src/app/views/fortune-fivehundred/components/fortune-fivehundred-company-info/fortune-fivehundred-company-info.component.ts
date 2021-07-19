@@ -79,8 +79,6 @@ export class FortuneFivehundredCompanyInfoComponent implements OnInit, AfterView
 
       this.fortuneFivehundredService.getCompanyUrls(years)
         .subscribe(urlByYear => {
-          console.log("Make it back!!!");
-          console.log(urlByYear);
           this.allYears = Object.keys(urlByYear);
 
           if (this.allYears.length === 0) {
