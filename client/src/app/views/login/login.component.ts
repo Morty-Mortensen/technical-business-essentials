@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
       email: this.email,
       password: this.password
     }).subscribe(user => {
-      this.cacheService.next(user);
+      localStorage.setItem('user', JSON.stringify(user));
+      this.cacheService.setData('user', user);
       this.snackbar.show('Successfully logged in!');
       this.router.navigate(['/']);
     }, error => {

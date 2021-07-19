@@ -9,27 +9,28 @@ import {User} from "../../models/user";
 })
 export class NavbarComponent implements OnInit {
 
-  public currUser: User = {
-    email: '',
-    firstName: '',
-    lastName: ''
-  };
-
   constructor(private cacheService: CacheService) {
   }
 
   ngOnInit(): void {
-    this.cacheService.user.subscribe(user => {
-      this.currUser = user;
-    })
+
   }
 
   public logout(): void {
-    this.cacheService.next({
-      email: '',
-      firstName: '',
-      lastName: ''
-    })
+    // Send to backend and clear that cache as well...
+    this.cacheService.clearData();
+  }
+
+  public getUser(): User {
+    try {
+      return (this.cacheService.getData('user') as User);
+    } catch (ex) {
+      return {
+        email: '',
+        firstName: '',
+        lastName: ''
+      } as User;
+    }
   }
 
 }

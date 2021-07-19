@@ -1,7 +1,9 @@
 package com.essentials.business.technical.controller;
 
+import com.essentials.business.technical.controller.exception.HttpException;
 import com.essentials.business.technical.model.request.FortuneFiveHundredCompanyYearsRequest;
 import com.essentials.business.technical.service.FortuneFiveHundredService;
+import com.essentials.business.technical.utils.ExceptionHandler;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -11,9 +13,16 @@ import java.util.Map;
 public class FortuneFivehundredController {
 
     @PostMapping("fortunefivehundred/companies")
-    public Map<String, String> getCompanies(@RequestBody FortuneFiveHundredCompanyYearsRequest fortuneCompanyYears) {
+    public Map<String, String> getCompanies(@RequestBody FortuneFiveHundredCompanyYearsRequest fortuneCompanyYears) throws Exception {
         FortuneFiveHundredService service = getFortuneFiveHundredService();
-        return service.getCompaniesUrls(fortuneCompanyYears.getYears());
+        Map<String, String> companiesByUrl = null;
+        try {
+            companiesByUrl = service.getCompaniesUrls(fortuneCompanyYears.getYears());
+        } catch (HttpException ex) {
+            ExceptionHandler.handleException(ex);
+        }
+
+        return companiesByUrl;
     }
 
     private FortuneFiveHundredService getFortuneFiveHundredService() {

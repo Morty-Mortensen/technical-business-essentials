@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
       },
       password: this.password
     }).subscribe(user => {
-      this.cacheService.next(user);
+      this.cacheService.setData('user', user);
       this.snackbar.show('Successfully registered!');
       this.router.navigate(['/']);
     }, error => {

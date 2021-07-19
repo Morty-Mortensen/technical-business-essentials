@@ -1,0 +1,51 @@
+import {Injectable} from "@angular/core";
+import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse} from "@angular/common/http";
+import {Observable, throwError} from "rxjs";
+import {CacheService} from "../services/cache.service";
+import {catchError, map} from "rxjs/operators";
+import {User} from "../models/user";
+import {SnackbarService} from "../services/snackbar.service";
+import {HttpStatusCode} from "@angular/common/http";
+import {Router} from "@angular/router";
+
+@Injectable()
+export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
+  constructor(private cacheService: CacheService, private snackbar: SnackbarService, private router: Router) {
+  }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let authReq = req.clone();
+
+    try {
+      const user = (this.cacheService.getData('user') as User);
+      authReq = req.clone({
+        setParams: {
+          token: user.token?.token || ''
+        }
+      });
+    } catch (ex) {
+      // Logging in/Registering.
+    }
+
+    return next.handle(authReq)
+      .pipe(
+        map((resp: any) => {
+          return resp;
+        }),
+        catchError(ex => {
+          if (ex.status === HttpStatusCode.Unauthorized) {
+            this.snackbar.show('Token expired, please log back in.')
+            this.cacheService.clearData();
+            this.router.navigate(['/login']);
+          } else if (ex.status === HttpStatusCode.Forbidden) {
+            this.snackbar.show('This content is forbidden. Please log in with admin privileges.')
+            this.router.navigate(['/forbidden']);
+          } else {
+            console.log(ex);
+            this.snackbar.show('An unknown exception occurred. Please contact the admin.')
+          }
+          return new Observable<HttpEvent<any>>();
+        })
+      );
+  }
+}

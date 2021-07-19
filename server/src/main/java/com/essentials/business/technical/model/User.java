@@ -6,8 +6,18 @@ public class User {
     private String lastName;
     private String password;
 
+    public Token getToken() {
+        return token;
+    }
+
+    public void setToken(Token token) {
+        this.token = token;
+    }
+
+    private Token token;
+
     public User() {
-        
+
     }
 
     public User(String email, String firstName, String lastName) {

@@ -1,10 +1,11 @@
 package com.essentials.business.technical.dao.selenium;
 
+import com.essentials.business.technical.controller.exception.ErrorType;
+import com.essentials.business.technical.dao.database.exception.DataAccessException;
 import org.json.JSONObject;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,11 +14,11 @@ import java.util.concurrent.TimeUnit;
 
 public class SeleniumFortuneFiveHundredDao extends SeleniumBaseDAO {
 
-    public SeleniumFortuneFiveHundredDao() {
+    public SeleniumFortuneFiveHundredDao() throws DataAccessException {
         super();
     }
 
-    public Map<String, String> getCompanyUrls(List<String> years) {
+    public Map<String, String> getCompanyUrls(List<String> years) throws DataAccessException {
         Map<String, String> urlsByYear = new HashMap<>();
         try {
             for (String year : years) {
@@ -41,9 +42,8 @@ public class SeleniumFortuneFiveHundredDao extends SeleniumBaseDAO {
                 }
                 urlsByYear.put(year, targetUrl);
             }
-        } catch (Exception e) {
-            System.out.println("An unexpected exception occurred.");
-            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            throw new DataAccessException("Unable to retrieve fortune five-hundred companies.", ex, ErrorType.INTERNAL_SERVER_ERROR);
         }
 
         return urlsByYear;

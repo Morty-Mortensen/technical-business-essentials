@@ -7,13 +7,13 @@
       <img class="navbar-image" src="assets/technicalbusinessessentialsopacity.png"/>
     </a>
   </div>
-  <div *ngIf="currUser.firstName !== ''" class="navbar-login-section">
-    <h2>Welcome, {{currUser.firstName}}</h2>
+  <div *ngIf="getUser().firstName !== ''" class="navbar-login-section">
     <a class="navbar-login-link">
+      <h2>Welcome, {{getUser().firstName}}</h2>
       <button (click)="logout()" mat-button class="accent-background navbar-login-button">Logout</button>
     </a>
   </div>
-  <div *ngIf="currUser.firstName === ''" class="navbar-login-section">
+  <div *ngIf="getUser().firstName === ''" class="navbar-login-section">
     <a routerLink="/login" class="navbar-login-link">
       <button mat-button class="accent-background navbar-login-button">Login</button>
     </a>

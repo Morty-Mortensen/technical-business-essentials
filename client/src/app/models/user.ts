@@ -2,7 +2,13 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
+  token?: Token;
   imageUrl?: string;
+}
+
+export interface Token {
+  token: string;
+  time: number;
 }
 
 export interface PostUserRequest {

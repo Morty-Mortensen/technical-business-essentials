@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'forbidden', component: RegisterComponent},
   {
     path: 'fortune-fivehundred', component: FortuneFivehundredComponent, children: [
       {path: 'companies', component: FortuneFivehundredCompanyInfoComponent}

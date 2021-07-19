@@ -1,26 +1,33 @@
 import {Injectable} from '@angular/core';
-import {User} from "../models/user";
-import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CacheService {
-  private _user: Subject<User> = new Subject<User>();
 
   constructor() {
-    this._user.next({
-      email: '',
-      firstName: '',
-      lastName: ''
-    })
   }
 
-  public next(user: User) {
-    this._user.next(user);
+  public setData(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
-  get user() {
-    return this._user.asObservable();
+  public getData(key: string): any {
+
+    const value = localStorage.getItem(key);
+
+    if (value === null) {
+      throw new Error("No value for " + key);
+    }
+
+    return JSON.parse(value);
+  }
+
+  public deleteData(key: string): void {
+    localStorage.removeItem(key);
+  }
+
+  public clearData(): void {
+    localStorage.clear();
   }
 }

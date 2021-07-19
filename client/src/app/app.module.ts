@@ -24,7 +24,7 @@ import {SubHeaderComponent} from './components/sub-header/sub-header.component';
 import {DatepickerRangeComponent} from './components/datepicker-range/datepicker-range.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {TechnicalDialogComponent} from './components/technical-dialog/technical-dialog.component';
@@ -33,6 +33,8 @@ import {HoverClassDirective} from './directive/hover-class.directive';
 import {LoadingComponent} from './components/loading/loading.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {TechnicalBusinessEssentialsInterceptor} from "./interceptor/technical-business-essentials-interceptor";
+import { ForbiddenComponent } from './views/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     TechnicalDialogComponent,
     HoverClassDirective,
     LoadingComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,11 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatProgressSpinnerModule,
     MatSnackBarModule
   ],
-  providers: [CurrencyPipe, DecimalPipe, TitleCasePipe, PercentPipe],
+  providers: [CurrencyPipe, DecimalPipe, TitleCasePipe, PercentPipe, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TechnicalBusinessEssentialsInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

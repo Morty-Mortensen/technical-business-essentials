@@ -1,10 +1,7 @@
 package com.essentials.business.technical.dao.database;
 
 import com.amazonaws.services.dynamodbv2.document.*;
-import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
-import com.amazonaws.services.dynamodbv2.document.utils.NameMap;
-import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
-import com.amazonaws.services.dynamodbv2.model.ReturnValue;
+import com.essentials.business.technical.controller.exception.ErrorType;
 import com.essentials.business.technical.dao.database.exception.DataAccessException;
 import com.essentials.business.technical.model.User;
 import com.essentials.business.technical.model.request.PostUserRequest;
@@ -20,11 +17,11 @@ public class UsersDAO extends BaseDAO {
     private static final String LAST_NAME_COLUMN = "lastName";
     private static final String PASSWORD = "password";
 
-    private UsersDAO() {
+    private UsersDAO() throws DataAccessException {
         super(TABLE_NAME);
     }
 
-    public synchronized static UsersDAO getInstance() {
+    public synchronized static UsersDAO getInstance() throws DataAccessException {
         if (usersDAO == null) {
             usersDAO = new UsersDAO();
         }
@@ -36,7 +33,7 @@ public class UsersDAO extends BaseDAO {
         Item item = table.getItem(EMAIL_COLUMN, email);
 
         if (item == null) {
-            throw new DataAccessException("User does not exist.");
+            throw new DataAccessException("User does not exist.", ErrorType.BAD_REQUEST);
         }
 
         return new User(item.getString(EMAIL_COLUMN), item.getString(FIRST_NAME_COLUMN), item.getString(LAST_NAME_COLUMN));
@@ -46,7 +43,7 @@ public class UsersDAO extends BaseDAO {
         Item item = table.getItem(EMAIL_COLUMN, email);
 
         if (item == null) {
-            throw new DataAccessException("User does not exist.");
+            throw new DataAccessException("User does not exist.", ErrorType.BAD_REQUEST);
         }
 
         return new User(item.getString(EMAIL_COLUMN), item.getString(PASSWORD), item.getString(FIRST_NAME_COLUMN), item.getString(LAST_NAME_COLUMN));
@@ -62,7 +59,7 @@ public class UsersDAO extends BaseDAO {
         try {
             table.putItem(item);
         } catch (Exception e) {
-            throw new DataAccessException("Unable to add user.", e);
+            throw new DataAccessException("Unable to add user.", ErrorType.INTERNAL_SERVER_ERROR);
         }
 
         return new User(request.getUser().getEmail(), request.getUser().getFirstName(), request.getUser().getLastName());

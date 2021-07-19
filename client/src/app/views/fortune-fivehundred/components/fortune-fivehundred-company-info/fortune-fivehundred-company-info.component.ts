@@ -30,7 +30,6 @@ export class FortuneFivehundredCompanyInfoComponent implements OnInit, AfterView
   public displayColumns: string[] = []
   public displayKeyColumns: string[] = []
   public columns: Record<string, string[]> = {};
-  public loading: boolean = false;
   public currYear: number = new Date().getFullYear();
 
   constructor(private fortuneFivehundredService: FortuneFivehundredService,
@@ -78,10 +77,16 @@ export class FortuneFivehundredCompanyInfoComponent implements OnInit, AfterView
         years.push(String(year));
       }
 
-      this.loading = true;
       this.fortuneFivehundredService.getCompanyUrls(years)
         .subscribe(urlByYear => {
+          console.log("Make it back!!!");
+          console.log(urlByYear);
           this.allYears = Object.keys(urlByYear);
+
+          if (this.allYears.length === 0) {
+            this.loadingService.stop();
+          }
+
           this.allYears.sort((a, b) => Number(b) - Number(a));
           this.allYears.forEach((year) => {
             this.fortuneFivehundredService.getCompanies(urlByYear[year])
@@ -92,8 +97,13 @@ export class FortuneFivehundredCompanyInfoComponent implements OnInit, AfterView
                 }
                 this.companies[year] = company;
                 this.columns[year] = this.processColumns(company);
+
+                if (Object.keys(this.companies).length === years.length) {
+                  this.loadingService.stop();
+                }
               })
           })
+        }, error => {
           this.loadingService.stop();
         })
     } else {

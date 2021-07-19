@@ -1,12 +1,15 @@
 package com.essentials.business.technical.dao.database.exception;
 
-public class DataAccessException extends Exception {
+import com.essentials.business.technical.controller.exception.HttpException;
+import com.essentials.business.technical.controller.exception.ErrorType;
 
-    public DataAccessException(String message) {
-        super(message);
+public class DataAccessException extends HttpException {
+
+    public DataAccessException(String message, ErrorType type) {
+        super(message, type);
     }
 
-    public DataAccessException(String message, Exception e) {
-        super(message, e);
+    public DataAccessException(String message, Exception e, ErrorType type) {
+        super(message, e, type);
     }
 }
