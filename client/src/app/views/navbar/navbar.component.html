@@ -34,14 +34,36 @@
     <button mat-menu-item><a routerLink="./fortune-fivehundred/companies">Fortune 500</a></button>
   </mat-menu>
 
-  <button mat-button class="navbar-link" [matMenuTriggerFor]="apComputerScience">AP
-    Computer Science
+  <button mat-button
+          class="navbar-link"
+          [matMenuTriggerFor]="coursesId">
+    Courses
   </button>
-  <mat-menu #apComputerScience="matMenu">
-    <button mat-menu-item [matMenuTriggerFor]="apComputerScienceLesson1">Lesson 1</button>
-  </mat-menu>
-  <mat-menu #apComputerScienceLesson1="matMenu">
-    <button mat-menu-item>History of CS</button>
-    <button mat-menu-item>Types</button>
+
+  <mat-menu
+    #coursesId>
+
+    <button mat-menu-item
+            [matMenuTriggerFor]="sectionId"
+            *ngFor="let course of courses"><a [routerLink]="['/course']"
+                                              [queryParams]="{courseId: course.id}">{{course.title}}</a>
+      <mat-menu
+        #sectionId>
+        <button mat-menu-item
+                [matMenuTriggerFor]="topicId"
+                *ngFor="let section of course.sections">
+          <a [routerLink]="['/course']"
+             [queryParams]="{courseId: course.id, sectionId: section.id}">{{section.title}}</a>
+          <mat-menu
+            #topicId>
+            <button mat-menu-item
+                    *ngFor="let topic of section.topics">
+              <a [routerLink]="['/course']"
+                 [queryParams]="{id: course.id, sectionId: section.id, topicId: topic.id}">{{topic.title}}</a>
+            </button>
+          </mat-menu>
+        </button>
+      </mat-menu>
+    </button>
   </mat-menu>
 </mat-card>

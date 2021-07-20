@@ -11,7 +11,7 @@ import {MatCardModule} from "@angular/material/card";
 import {LoginComponent} from './views/login/login.component';
 import {RegisterComponent} from './views/register/register.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {CommonModule, CurrencyPipe, DecimalPipe, PercentPipe, TitleCasePipe} from "@angular/common";
+import {CommonModule, CurrencyPipe, DecimalPipe, KeyValuePipe, PercentPipe, TitleCasePipe} from "@angular/common";
 import {HomeComponent} from './views/home/home.component';
 import {MatInputModule} from "@angular/material/input";
 import {InputComponent} from './components/input/input.component';
@@ -34,7 +34,11 @@ import {LoadingComponent} from './components/loading/loading.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {TechnicalBusinessEssentialsInterceptor} from "./interceptor/technical-business-essentials-interceptor";
-import { ForbiddenComponent } from './views/forbidden/forbidden.component';
+import {ForbiddenComponent} from './views/forbidden/forbidden.component';
+import {CourseComponent} from './views/course/course.component';
+import {CourseSectionComponent} from './views/course/course-section/course-section.component';
+import {CourseTopicComponent} from './views/course/course-topic/course-topic.component';
+import {CourseActivityComponent} from './views/course/course-activity/course-activity.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,10 @@ import { ForbiddenComponent } from './views/forbidden/forbidden.component';
     HoverClassDirective,
     LoadingComponent,
     ForbiddenComponent,
+    CourseComponent,
+    CourseSectionComponent,
+    CourseTopicComponent,
+    CourseActivityComponent,
   ],
   imports: [
     BrowserModule,

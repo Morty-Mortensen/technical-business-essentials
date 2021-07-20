@@ -9,6 +9,8 @@ import {HttpStatusCode} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {LoadingService} from "../services/loading.service";
 
+const BASE_URL = 'localhost:8080';
+
 @Injectable()
 export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
   constructor(private cacheService: CacheService, private snackbar: SnackbarService, private router: Router, private loadingService: LoadingService) {
@@ -22,7 +24,8 @@ export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
       authReq = req.clone({
         setParams: {
           token: user.token?.token || ''
-        }
+        },
+        url: BASE_URL + (req.url.startsWith('/')) ? req.url : `/${req.url}`
       });
     } catch (ex) {
       // Logging in/Registering.
