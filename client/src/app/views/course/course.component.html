@@ -9,15 +9,24 @@
           <span class="course-left-progress-percent">40% complete</span>
         </div>
         <div class="course-left-sections-container">
-          <ng-container *ngFor="let section of course.sections">
-            <div class="input-background course-left-section">
-              <h3 class="course-left-section-title">{{section.title}}</h3>
-            </div>
-            <div *ngFor="let topic of section.topics"
-                 class="input-background course-left-section-topic">
-              <span class="course-left-section-topic-title">{{topic.title}}</span>
-            </div>
-          </ng-container>
+          <mat-accordion *ngFor="let section of course.sections" class="course-left-section">
+            <mat-expansion-panel class="course-left-section-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="course-left-section-panel-title">
+                  {{section.title}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="course-left-section-topic-container" *ngFor="let topic of section.topics">
+                <mat-action-row
+                  class="course-left-section-topic-row">
+                  <button mat-flat-button
+                          class="course-left-section-topic-title">
+                    {{topic.title}}
+                  </button>
+                </mat-action-row>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
         </div>
       </div>
     </div>
