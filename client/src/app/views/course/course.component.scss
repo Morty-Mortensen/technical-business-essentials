@@ -1,0 +1,126 @@
+.course-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.course-left-border-container {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100%;
+  border-right: solid black 4px;
+}
+
+.course-left-container {
+  display: flex;
+  width: 95%;
+  height: 100%;
+  overflow: auto;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px 11px 20px 9px;
+}
+
+.course-left-inner-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.course-left-title-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 175px;
+  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.course-left-progress-percent {
+  margin-top: 5px;
+}
+
+.course-left-sections-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.course-left-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  border-bottom: solid white 3px;
+  border-top: solid white 3px;
+}
+
+.course-left-section-title {
+  margin: 0 0 0 10px;
+}
+
+.course-left-section-topic {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  border-bottom: solid white 1px;
+}
+
+.course-left-section-topic-title {
+  margin: 0 0 0 10px;
+}
+
+.course-right-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 100%;
+  overflow: auto;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.course-right-inner-container {
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.course-right-title {
+  margin: 0 0 5px 0;
+}
+
+.course-right-video-container {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.course-right-activity-container {
+  width: 100%;
+}
+
+.course-right-activity-description {
+  margin: 0 0 0 0;
+  font-size: 16px;
+}
+
+.course-right-activity-code-sample {
+  width: 100%;
+  min-height: 200px;
+}

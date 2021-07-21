@@ -1,1 +1,49 @@
-<p>course works!</p>
+<div class="course-container">
+  <div class="course-left-border-container">
+    <div class="course-left-container">
+      <div class="course-left-inner-container">
+        <div
+          class="course-left-title-container">
+          <h2>{{course.title}}</h2>
+          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+          <span class="course-left-progress-percent">40% complete</span>
+        </div>
+        <div class="course-left-sections-container">
+          <ng-container *ngFor="let section of course.sections">
+            <div class="input-background course-left-section">
+              <h3 class="course-left-section-title">{{section.title}}</h3>
+            </div>
+            <div *ngFor="let topic of section.topics"
+                 class="input-background course-left-section-topic">
+              <span class="course-left-section-topic-title">{{topic.title}}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="course-right-container">
+    <div class="course-right-inner-container">
+      <h2 class="course-right-title">{{selectedTopic.title}}</h2>
+      <div class="course-right-video-container">
+        <iframe
+          width="100%"
+          height="500"
+          src="https://www.youtube.com/embed/Tm8LGxTLtQk"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+        <p>{{selectedTopic.description}}</p>
+      </div>
+
+      <div *ngFor="let activity of selectedTopic.activities;
+           let i = index"
+           class="course-right-activity-container">
+        <p class="course-right-activity-description">{{i + 1}}: {{activity.description}}</p>
+        <textarea class="course-right-activity-code-sample" [value]="activity.sampleCode"></textarea>
+      </div>
+    </div>
+  </div>
+</div>

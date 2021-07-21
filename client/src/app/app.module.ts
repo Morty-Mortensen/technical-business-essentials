@@ -39,6 +39,7 @@ import {CourseComponent} from './views/course/course.component';
 import {CourseSectionComponent} from './views/course/course-section/course-section.component';
 import {CourseTopicComponent} from './views/course/course-topic/course-topic.component';
 import {CourseActivityComponent} from './views/course/course-activity/course-activity.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import {CourseActivityComponent} from './views/course/course-activity/course-act
     MatNativeDateModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule,
   ],
   providers: [CurrencyPipe, DecimalPipe, TitleCasePipe, PercentPipe, {
     provide: HTTP_INTERCEPTORS,

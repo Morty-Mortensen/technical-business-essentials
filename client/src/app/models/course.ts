@@ -8,6 +8,7 @@ export interface CourseTopic {
   id: number;
   title: string;
   videoUrl: string;
+  description: string;
   activities: CourseActivity[];
 }
 
@@ -27,6 +28,6 @@ export interface Course {
 
 export interface CourseRequest {
   courseId: number;
-  sectionId: number;
-  topicId: number;
+  sectionId: number | null;
+  topicId: number | null;
 }

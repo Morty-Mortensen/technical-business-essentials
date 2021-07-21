@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
           id: 1,
           title: 'Michael Anchello, the very first.',
           videoUrl: '',
+          description: 'Great video.',
           activities: []
         }
       ]
@@ -41,6 +42,7 @@ export class NavbarComponent implements OnInit {
             id: 1,
             title: 'The first Java program.',
             videoUrl: '',
+            description: 'Great video.',
             activities: []
           }
         ]
