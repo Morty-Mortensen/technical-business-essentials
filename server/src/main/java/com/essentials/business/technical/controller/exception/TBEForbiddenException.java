@@ -14,4 +14,9 @@ public class TBEForbiddenException extends TBEServerException {
         super(message, e);
     }
 
+    @Override
+    public void throwException() throws TBEServerException {
+        throw new TBEForbiddenException(this);
+    }
+
 }

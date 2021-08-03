@@ -19,7 +19,13 @@ public class CacheMiddleware implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String queryString = request.getQueryString();
-        String token = StringUtils.getQueryParams(queryString).get(Token.TOKEN);
+        String token = "";
+        try {
+            token = StringUtils.getQueryParams(queryString).get(Token.TOKEN);
+        } catch (Exception ex) {
+            return ExceptionHandler.forwardException(request, response, new TBEUnauthorizedException(String.format("%s: No query params were sent, token required.", CacheMiddleware.class.getName()), ex));
+        }
+
 
         if (token.equals("")) {
             return ExceptionHandler.forwardException(request, response, new TBEUnauthorizedException(String.format("%s: Token was not found.", CacheMiddleware.class.getName())));

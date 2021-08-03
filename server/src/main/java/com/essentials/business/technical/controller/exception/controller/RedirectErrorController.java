@@ -12,8 +12,8 @@ public class RedirectErrorController {
     public static String REDIRECT_ATTRIBUTE = "error";
 
     @PostMapping("error")
-    public void handleError(HttpServletRequest request) throws Exception {
+    public void handleError(HttpServletRequest request) throws TBEServerException {
         TBEServerException ex = (TBEServerException) request.getAttribute(REDIRECT_ATTRIBUTE);
-        ExceptionHandler.handleException(ex);
+        ex.throwException();
     }
 }

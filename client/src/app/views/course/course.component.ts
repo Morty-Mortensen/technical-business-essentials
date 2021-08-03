@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {CourseService} from "../../services/course.service";
+import {CourseService} from "../../services/http/course.service";
 import {Course, CourseRequest, CourseTopic} from "../../models/course";
 
 @Component({

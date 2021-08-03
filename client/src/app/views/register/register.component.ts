@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {RegisterService} from "../../services/register.service";
-import {CacheService} from "../../services/cache.service";
+import {RegisterService} from "../../services/http/register.service";
+import {CacheService} from "../../services/utils/cache.service";
 import {Router} from "@angular/router";
-import {SnackbarService} from "../../services/snackbar.service";
+import {SnackbarService} from "../../services/utils/snackbar.service";
 
 @Component({
   selector: 'app-register',

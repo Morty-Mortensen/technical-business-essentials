@@ -13,4 +13,9 @@ public class TBEUnauthorizedException extends TBEServerException {
     public TBEUnauthorizedException(String message, Exception e) {
         super(message, e);
     }
+
+    @Override
+    public void throwException() throws TBEServerException {
+        throw new TBEUnauthorizedException(this);
+    }
 }

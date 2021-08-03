@@ -7,6 +7,8 @@ import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
 import {HttpClient} from "@angular/common/http";
+import {SnackbarService} from "../../services/utils/snackbar.service";
+import {CompiledCode} from "../../models/course";
 
 const THEME = 'ace/theme/github';
 const LANG = 'ace/mode/javascript';
@@ -28,7 +30,7 @@ export class AceTextEditorComponent implements OnInit, AfterViewInit {
 
   public code: string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private snackBar: SnackbarService) {
 
   }
 
@@ -55,8 +57,9 @@ export class AceTextEditorComponent implements OnInit, AfterViewInit {
       language: this.codeLanguage,
       versionIndex: this.codeLanguageVersion
     }).subscribe(res => {
-      console.log("Success")
-      console.log(res);
+      this.snackBar.show('Compiled output: ' + (res as CompiledCode).output)
+      // console.log("Success")
+      // console.log(res);
     }, err => {
       console.log("Error :(")
       console.log(err)

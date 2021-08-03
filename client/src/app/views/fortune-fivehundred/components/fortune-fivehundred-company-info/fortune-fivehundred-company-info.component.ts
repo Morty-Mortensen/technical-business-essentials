@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import DateRange from "../../../../models/date-range";
-import {FortuneFivehundredService} from "../../../../services/fortune-fivehundred.service";
-import {DateFormatterService} from "../../../../services/date-formatter.service";
+import {FortuneFivehundredService} from "../../../../services/http/fortune-fivehundred.service";
+import {DateFormatterService} from "../../../../services/utils/date-formatter.service";
 import {
   FortuneFiveHundredCompanyInfoColumn,
 } from "../../../../models/fortune-fivehundred-company-info";
@@ -9,9 +9,9 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {CurrencyPipe, DecimalPipe, TitleCasePipe} from "@angular/common";
 import {isNumeric} from "rxjs/internal-compatibility";
-import {ExcelService} from "../../../../services/excel.service";
+import {ExcelService} from "../../../../services/utils/excel.service";
 import * as uuid from 'uuid';
-import {LoadingService} from "../../../../services/loading.service";
+import {LoadingService} from "../../../../services/utils/loading.service";
 
 const BEGIN_YEAR: number = 1996;
 

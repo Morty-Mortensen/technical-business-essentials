@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginService} from "../../services/login.service";
-import {CacheService} from "../../services/cache.service";
+import {LoginService} from "../../services/http/login.service";
+import {CacheService} from "../../services/utils/cache.service";
 import {Router} from "@angular/router";
-import {SnackbarService} from "../../services/snackbar.service";
+import {SnackbarService} from "../../services/utils/snackbar.service";
 
 @Component({
   selector: 'app-login',

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LoadingService} from "../../services/loading.service";
+import {LoadingService} from "../../services/utils/loading.service";
 
 @Component({
   selector: 'app-loading',

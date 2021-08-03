@@ -31,3 +31,10 @@ export interface CourseRequest {
   sectionId: number | null;
   topicId: number | null;
 }
+
+export interface CompiledCode {
+  output: string,
+  statusCode: number,
+  memory: string,
+  cpuTime: string
+}

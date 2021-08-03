@@ -14,7 +14,7 @@ public class AuthenticationDAO extends BaseDAO {
     private static AuthenticationDAO authenticationDAO;
     private static final String TOKEN_COLUMN = "token";
     private static final String TIME_COLUMN = "time";
-    private static final long EXPIRATION_TIME = 5000; // Milliseconds (1 min)
+    private static final long EXPIRATION_TIME = 30000; // Milliseconds (30 seconds)
 
     private AuthenticationDAO() throws TBEServerException {
         super(TABLE_NAME);

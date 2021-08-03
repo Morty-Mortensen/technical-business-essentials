@@ -33,9 +33,8 @@ public class JDoodleService {
         if (isValidateRequest(request)) {
             return dao.compileCode(request, userAgent, COMPILE_URL);
         } else {
-            throw new TBEBadRequestException("Invalid request");
+            throw new TBEBadRequestException(String.format("Unsupported language [%s] or version [%s]", request.getLanguage(), request.getVersionIndex()));
         }
-
     }
 
     public JDoodleDAO getJDoodleDao() {

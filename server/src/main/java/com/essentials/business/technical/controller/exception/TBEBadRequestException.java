@@ -13,4 +13,9 @@ public class TBEBadRequestException extends TBEServerException {
     public TBEBadRequestException(String message, Exception e) {
         super(message, e);
     }
+
+    @Override
+    public void throwException() throws TBEServerException {
+        throw new TBEBadRequestException(this);
+    }
 }

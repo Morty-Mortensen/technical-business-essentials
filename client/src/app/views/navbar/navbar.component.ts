@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CacheService} from "../../services/cache.service";
+import {CacheService} from "../../services/utils/cache.service";
 import {User} from "../../models/user";
 import {Course} from "../../models/course";
 import {KeyValuePipe} from "@angular/common";

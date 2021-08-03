@@ -1,13 +1,13 @@
 import {Injectable} from "@angular/core";
 import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
-import {CacheService} from "../services/cache.service";
+import {CacheService} from "../services/utils/cache.service";
 import {catchError, map} from "rxjs/operators";
 import {User} from "../models/user";
-import {SnackbarService} from "../services/snackbar.service";
+import {SnackbarService} from "../services/utils/snackbar.service";
 import {HttpStatusCode} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {LoadingService} from "../services/loading.service";
+import {LoadingService} from "../services/utils/loading.service";
 
 const BASE_URL = 'localhost:8080';
 

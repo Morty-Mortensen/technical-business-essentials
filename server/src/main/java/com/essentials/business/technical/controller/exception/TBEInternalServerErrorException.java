@@ -13,4 +13,9 @@ public class TBEInternalServerErrorException extends TBEServerException {
     public TBEInternalServerErrorException(String message, Exception e) {
         super(message, e);
     }
+
+    @Override
+    public void throwException() throws TBEServerException {
+        throw new TBEInternalServerErrorException(this);
+    }
 }
