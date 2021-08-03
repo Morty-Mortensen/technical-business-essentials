@@ -13,7 +13,7 @@ public class RedirectErrorController {
 
     @PostMapping("error")
     public void handleError(HttpServletRequest request) throws Exception {
-        HttpException ex = (HttpException) request.getAttribute(REDIRECT_ATTRIBUTE);
+        TBEServerException ex = (TBEServerException) request.getAttribute(REDIRECT_ATTRIBUTE);
         ExceptionHandler.handleException(ex);
     }
 }

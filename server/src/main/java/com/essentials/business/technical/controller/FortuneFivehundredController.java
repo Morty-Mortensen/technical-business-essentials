@@ -1,12 +1,11 @@
 package com.essentials.business.technical.controller;
 
-import com.essentials.business.technical.controller.exception.HttpException;
+import com.essentials.business.technical.controller.exception.TBEServerException;
 import com.essentials.business.technical.model.request.FortuneFiveHundredCompanyYearsRequest;
 import com.essentials.business.technical.service.FortuneFiveHundredService;
 import com.essentials.business.technical.utils.ExceptionHandler;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @CrossOrigin("http://localhost:4200")
@@ -14,15 +13,10 @@ import java.util.Map;
 public class FortuneFivehundredController {
 
     @PostMapping("fortunefivehundred/companies")
-    public Map<String, String> getCompanies(@RequestBody FortuneFiveHundredCompanyYearsRequest fortuneCompanyYears) throws Exception {
+    public Map<String, String> getCompanies(@RequestBody FortuneFiveHundredCompanyYearsRequest fortuneCompanyYears) throws TBEServerException {
         FortuneFiveHundredService service = getFortuneFiveHundredService();
         Map<String, String> companiesByUrl = null;
-        try {
-            companiesByUrl = service.getCompaniesUrls(fortuneCompanyYears.getYears());
-        } catch (HttpException ex) {
-            ExceptionHandler.handleException(ex);
-        }
-
+        companiesByUrl = service.getCompaniesUrls(fortuneCompanyYears.getYears());
         return companiesByUrl;
     }
 

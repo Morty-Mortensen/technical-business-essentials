@@ -1,6 +1,6 @@
 package com.essentials.business.technical.controller;
 
-import com.essentials.business.technical.controller.exception.HttpException;
+import com.essentials.business.technical.controller.exception.TBEServerException;
 import com.essentials.business.technical.model.User;
 import com.essentials.business.technical.model.request.PostUserRequest;
 import com.essentials.business.technical.model.request.ValidateUserRequest;
@@ -16,26 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @PostMapping("user")
-    public User postUser(@RequestBody PostUserRequest userRequest) throws Exception {
+    public User postUser(@RequestBody PostUserRequest userRequest) throws TBEServerException {
         UserService service = getUserService();
         User user = null;
-        try {
-            user = service.postUser(userRequest);
-        } catch (HttpException ex) {
-            ExceptionHandler.handleException(ex);
-        }
+        user = service.postUser(userRequest);
         return user;
     }
 
     @PostMapping("user/validate")
-    public User validateUser(@RequestBody ValidateUserRequest userRequest) throws Exception {
+    public User validateUser(@RequestBody ValidateUserRequest userRequest) throws TBEServerException {
         UserService service = getUserService();
         User user = null;
-        try {
-            user = service.validateUser(userRequest);
-        } catch (HttpException ex) {
-            ExceptionHandler.handleException(ex);
-        }
+        user = service.validateUser(userRequest);
         return user;
     }
 

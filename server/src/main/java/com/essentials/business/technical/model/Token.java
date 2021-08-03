@@ -1,6 +1,7 @@
 package com.essentials.business.technical.model;
 
 public class Token {
+    public static final String TOKEN = "token";
     private final String token;
     private final long time;
 

@@ -8,22 +8,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class JNoodleCodeCompileRequest {
+public class JDoodleCodeCompileRequest {
     private String clientId;
     private String clientSecret;
     private String script;
     private String language;
     private String versionIndex;
 
-    public JNoodleCodeCompileRequest() {
+    public JDoodleCodeCompileRequest() {
     }
 
-    public JNoodleCodeCompileRequest(String language, String versionIndex) {
+    public JDoodleCodeCompileRequest(String language, String versionIndex) {
         this.language = language;
         this.versionIndex = versionIndex;
     }
 
-    public JNoodleCodeCompileRequest(String script, String language, String versionIndex) {
+    public JDoodleCodeCompileRequest(String script, String language, String versionIndex) {
         this.script = script;
         this.language = language;
         this.versionIndex = versionIndex;
@@ -32,7 +32,7 @@ public class JNoodleCodeCompileRequest {
     public void setApiKeys() {
         JSONParser parser = new JSONParser();
         try {
-            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("jnoodle.json"));
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("JDoodle.json"));
             this.clientId = (String) jsonObject.get("clientId");
             this.clientSecret = (String) jsonObject.get("clientSecret");
         } catch (ParseException e) {

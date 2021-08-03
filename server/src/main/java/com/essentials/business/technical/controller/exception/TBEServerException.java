@@ -1,16 +1,16 @@
 package com.essentials.business.technical.controller.exception;
 
-public class HttpException extends Exception {
+public class TBEServerException extends Exception {
 
-    public HttpException(Exception ex) {
+    public TBEServerException(Exception ex) {
         super(ex.getLocalizedMessage(), ex);
     }
 
-    public HttpException(String message) {
+    public TBEServerException(String message) {
         super(message);
     }
 
-    public HttpException(String message, Exception e) {
+    public TBEServerException(String message, Exception e) {
         super(message, e);
     }
 }

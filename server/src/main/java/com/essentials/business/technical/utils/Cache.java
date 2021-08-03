@@ -6,8 +6,8 @@ import java.util.Map;
 public class Cache {
     private static Cache cache;
     private Map<String, Object> internalCache = new HashMap<>();
-    public static final String COOKIE = "cookie";
-    public static final long COOKIE_TIME = 60000;
+    public static final String USER_AGENT = "User-Agent";
+    public static final String APPLICATION_TYPE = "Content-Type";
 
     private Cache() {
     }
@@ -16,7 +16,6 @@ public class Cache {
         if (cache == null) {
             cache = new Cache();
         }
-
         return cache;
     }
 

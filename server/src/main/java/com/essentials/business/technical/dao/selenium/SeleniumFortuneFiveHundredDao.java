@@ -1,7 +1,7 @@
 package com.essentials.business.technical.dao.selenium;
 
-import com.essentials.business.technical.controller.exception.ErrorType;
-import com.essentials.business.technical.dao.database.exception.DataAccessException;
+import com.essentials.business.technical.controller.exception.TBEInternalServerErrorException;
+import com.essentials.business.technical.controller.exception.TBEServerException;
 import org.json.JSONObject;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
@@ -14,11 +14,11 @@ import java.util.concurrent.TimeUnit;
 
 public class SeleniumFortuneFiveHundredDao extends SeleniumBaseDAO {
 
-    public SeleniumFortuneFiveHundredDao() throws DataAccessException {
+    public SeleniumFortuneFiveHundredDao() throws TBEServerException {
         super();
     }
 
-    public Map<String, String> getCompanyUrls(List<String> years) throws DataAccessException {
+    public Map<String, String> getCompanyUrls(List<String> years) throws TBEServerException {
         Map<String, String> urlsByYear = new HashMap<>();
         try {
             for (String year : years) {
@@ -37,13 +37,13 @@ public class SeleniumFortuneFiveHundredDao extends SeleniumBaseDAO {
                             break;
                         }
                     } catch (Exception e) {
-                        System.out.println("Not the target");
+                        // Not the exact value.
                     }
                 }
                 urlsByYear.put(year, targetUrl);
             }
         } catch (Exception ex) {
-            throw new DataAccessException("Unable to retrieve fortune five-hundred companies.", ex, ErrorType.INTERNAL_SERVER_ERROR);
+            throw new TBEInternalServerErrorException("Unable to retrieve fortune five-hundred companies.", ex);
         }
 
         return urlsByYear;

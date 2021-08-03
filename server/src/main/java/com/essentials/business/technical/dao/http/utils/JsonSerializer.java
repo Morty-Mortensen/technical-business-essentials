@@ -1,4 +1,4 @@
-package com.essentials.business.technical.dao.http;
+package com.essentials.business.technical.dao.http.utils;
 
 import com.google.gson.Gson;
 

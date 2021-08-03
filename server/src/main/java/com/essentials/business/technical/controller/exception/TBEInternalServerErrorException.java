@@ -1,16 +1,16 @@
 package com.essentials.business.technical.controller.exception;
 
-public class HttpInternalServerErrorException extends Exception {
+public class TBEInternalServerErrorException extends TBEServerException {
 
-    public HttpInternalServerErrorException(Exception ex) {
+    public TBEInternalServerErrorException(Exception ex) {
         super(ex.getLocalizedMessage(), ex);
     }
 
-    public HttpInternalServerErrorException(String message) {
+    public TBEInternalServerErrorException(String message) {
         super(message);
     }
 
-    public HttpInternalServerErrorException(String message, Exception e) {
+    public TBEInternalServerErrorException(String message, Exception e) {
         super(message, e);
     }
 }

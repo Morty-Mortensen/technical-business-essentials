@@ -1,7 +1,10 @@
-package com.essentials.business.technical.dao.http;
+package com.essentials.business.technical.dao.http.utils;
 
-import com.essentials.business.technical.controller.exception.ErrorType;
-import com.essentials.business.technical.dao.database.exception.DataAccessException;
+import com.essentials.business.technical.controller.exception.TBEServerException;
+import com.essentials.business.technical.controller.exception.TBEBadRequestException;
+import com.essentials.business.technical.controller.exception.TBEForbiddenException;
+import com.essentials.business.technical.controller.exception.TBEInternalServerErrorException;
+import org.springframework.http.HttpHeaders;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -27,8 +30,8 @@ public class ClientCommunicator {
         void sendRequest(HttpURLConnection connection) throws IOException;
     }
 
-    <T> T doPost(String urlPath, final Object requestInfo, Map<String, String> headers, Class<T> returnType)
-            throws IOException, DataAccessException {
+    public <T> T doPost(String urlPath, final Object requestInfo, Map<String, String> headers, Class<T> returnType)
+            throws TBEServerException {
         RequestStrategy requestStrategy = new RequestStrategy() {
             @Override
             public void setRequestMethod(HttpURLConnection connection) throws IOException {
@@ -38,20 +41,18 @@ public class ClientCommunicator {
             @Override
             public void sendRequest(HttpURLConnection connection) throws IOException {
                 connection.setDoOutput(true);
-
                 String entityBody = JsonSerializer.serialize(requestInfo);
-                try (DataOutputStream os = new DataOutputStream(connection.getOutputStream())) {
-                    os.writeBytes(entityBody);
-                    os.flush();
-                }
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(entityBody.getBytes());
+                outputStream.flush();
             }
         };
 
         return doRequest(urlPath, headers, returnType, requestStrategy);
     }
 
-    <T> T doGet(String urlPath, Map<String, String> headers, Class<T> returnType)
-            throws IOException, DataAccessException {
+    public <T> T doGet(String urlPath, Map<String, String> headers, Class<T> returnType)
+            throws IOException, TBEServerException {
         RequestStrategy requestStrategy = new RequestStrategy() {
             @Override
             public void setRequestMethod(HttpURLConnection connection) throws IOException {
@@ -68,7 +69,7 @@ public class ClientCommunicator {
     }
 
     private <T> T doRequest(String urlPath, Map<String, String> headers, Class<T> returnType, RequestStrategy requestStrategy)
-            throws IOException, DataAccessException {
+            throws TBEServerException {
 
         HttpURLConnection connection = null;
 
@@ -77,6 +78,8 @@ public class ClientCommunicator {
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(TIMEOUT_MILLIS);
             requestStrategy.setRequestMethod(connection);
+
+            connection.setRequestProperty(HttpHeaders.CONTENT_TYPE, "application/json");
 
             if (headers != null) {
                 for (String headerKey : headers.keySet()) {
@@ -91,17 +94,19 @@ public class ClientCommunicator {
                     String responseString = getResponse(connection.getInputStream());
                     return JsonSerializer.deserialize(responseString, returnType);
                 case HttpURLConnection.HTTP_BAD_REQUEST:
-                    ErrorResponse errorResponse = getErrorResponse(connection);
-                    throw new DataAccessException(errorResponse.errorMessage, ErrorType.BAD_REQUEST);
+                    String errorResponse = getErrorResponse(connection);
+                    throw new TBEBadRequestException(errorResponse);
                 case HttpURLConnection.HTTP_INTERNAL_ERROR:
                     errorResponse = getErrorResponse(connection);
-                    throw new DataAccessException(errorResponse.errorMessage, ErrorType.INTERNAL_SERVER_ERROR);
+                    throw new TBEInternalServerErrorException(errorResponse);
                 case HttpURLConnection.HTTP_FORBIDDEN:
                     errorResponse = getErrorResponse(connection);
-                    throw new DataAccessException(errorResponse.errorMessage, ErrorType.FORBIDDEN);
+                    throw new TBEForbiddenException(errorResponse);
                 default:
                     throw new RuntimeException("An unknown error occurred. Response code = " + connection.getResponseCode());
             }
+        } catch (IOException ex) {
+            throw new TBEInternalServerErrorException("Unable to parse error stream.", ex);
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -114,13 +119,18 @@ public class ClientCommunicator {
         return new URL(urlString);
     }
 
-    private ErrorResponse getErrorResponse(HttpURLConnection connection) throws IOException {
-        String responseString = getResponse(connection.getErrorStream());
-        if (responseString == null) {
-            throw new RuntimeException("No response returned from server for response code " + connection.getResponseCode());
-        } else {
-            return JsonSerializer.deserialize(responseString, ErrorResponse.class);
+    private String getErrorResponse(HttpURLConnection connection) throws TBEServerException {
+        try {
+            String responseString = getResponse(connection.getErrorStream());
+            if (responseString == null) {
+                throw new RuntimeException("No response returned from server for response code " + connection.getResponseCode());
+            } else {
+                return responseString;
+            }
+        } catch (IOException ex) {
+            throw new TBEInternalServerErrorException("Unable to parse error stream.", ex);
         }
+
     }
 
     private String getResponse(InputStream inputStream) throws IOException {

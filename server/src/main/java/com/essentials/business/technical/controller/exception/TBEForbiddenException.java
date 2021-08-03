@@ -1,16 +1,16 @@
 package com.essentials.business.technical.controller.exception;
 
-public class HttpForbiddenException extends Exception {
+public class TBEForbiddenException extends TBEServerException {
 
-    public HttpForbiddenException(Exception ex) {
+    public TBEForbiddenException(Exception ex) {
         super(ex.getLocalizedMessage(), ex);
     }
 
-    public HttpForbiddenException(String message) {
+    public TBEForbiddenException(String message) {
         super(message);
     }
 
-    public HttpForbiddenException(String message, Exception e) {
+    public TBEForbiddenException(String message, Exception e) {
         super(message, e);
     }
 

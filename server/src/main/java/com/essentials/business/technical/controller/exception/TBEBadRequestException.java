@@ -1,16 +1,16 @@
 package com.essentials.business.technical.controller.exception;
 
-public class HttpBadRequestException extends Exception {
+public class TBEBadRequestException extends TBEServerException {
 
-    public HttpBadRequestException(Exception ex) {
+    public TBEBadRequestException(Exception ex) {
         super(ex.getLocalizedMessage(), ex);
     }
 
-    public HttpBadRequestException(String message) {
+    public TBEBadRequestException(String message) {
         super(message);
     }
 
-    public HttpBadRequestException(String message, Exception e) {
+    public TBEBadRequestException(String message, Exception e) {
         super(message, e);
     }
 }

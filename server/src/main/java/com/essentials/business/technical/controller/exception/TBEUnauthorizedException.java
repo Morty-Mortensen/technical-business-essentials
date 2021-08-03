@@ -1,16 +1,16 @@
 package com.essentials.business.technical.controller.exception;
 
-public class HttpUnauthorizedException extends Exception {
+public class TBEUnauthorizedException extends TBEServerException {
 
-    public HttpUnauthorizedException(Exception ex) {
+    public TBEUnauthorizedException(Exception ex) {
         super(ex.getLocalizedMessage(), ex);
     }
 
-    public HttpUnauthorizedException(String message) {
+    public TBEUnauthorizedException(String message) {
         super(message);
     }
 
-    public HttpUnauthorizedException(String message, Exception e) {
+    public TBEUnauthorizedException(String message, Exception e) {
         super(message, e);
     }
 }

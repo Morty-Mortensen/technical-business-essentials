@@ -1,8 +1,9 @@
 package com.essentials.business.technical.dao.database;
 
 import com.amazonaws.services.dynamodbv2.document.*;
-import com.essentials.business.technical.controller.exception.ErrorType;
-import com.essentials.business.technical.dao.database.exception.DataAccessException;
+import com.essentials.business.technical.controller.exception.TBEBadRequestException;
+import com.essentials.business.technical.controller.exception.TBEInternalServerErrorException;
+import com.essentials.business.technical.controller.exception.TBEServerException;
 import com.essentials.business.technical.model.User;
 import com.essentials.business.technical.model.request.PostUserRequest;
 
@@ -17,11 +18,11 @@ public class UsersDAO extends BaseDAO {
     private static final String LAST_NAME_COLUMN = "lastName";
     private static final String PASSWORD = "password";
 
-    private UsersDAO() throws DataAccessException {
+    private UsersDAO() throws TBEServerException {
         super(TABLE_NAME);
     }
 
-    public synchronized static UsersDAO getInstance() throws DataAccessException {
+    public synchronized static UsersDAO getInstance() throws TBEServerException {
         if (usersDAO == null) {
             usersDAO = new UsersDAO();
         }
@@ -29,27 +30,27 @@ public class UsersDAO extends BaseDAO {
         return usersDAO;
     }
 
-    public User get(String email) throws DataAccessException {
+    public User get(String email) throws TBEServerException {
         Item item = table.getItem(EMAIL_COLUMN, email);
 
         if (item == null) {
-            throw new DataAccessException("User does not exist.", ErrorType.BAD_REQUEST);
+            throw new TBEBadRequestException("User does not exist.");
         }
 
         return new User(item.getString(EMAIL_COLUMN), item.getString(FIRST_NAME_COLUMN), item.getString(LAST_NAME_COLUMN));
     }
 
-    public User getWithPassword(String email) throws DataAccessException {
+    public User getWithPassword(String email) throws TBEServerException {
         Item item = table.getItem(EMAIL_COLUMN, email);
 
         if (item == null) {
-            throw new DataAccessException("User does not exist.", ErrorType.BAD_REQUEST);
+            throw new TBEBadRequestException("User does not exist.");
         }
 
         return new User(item.getString(EMAIL_COLUMN), item.getString(PASSWORD), item.getString(FIRST_NAME_COLUMN), item.getString(LAST_NAME_COLUMN));
     }
 
-    public User post(PostUserRequest request) throws DataAccessException {
+    public User post(PostUserRequest request) throws TBEServerException {
         Item item = new Item()
                 .withPrimaryKey(EMAIL_COLUMN, request.getUser().getEmail())
                 .withString(FIRST_NAME_COLUMN, request.getUser().getFirstName())
@@ -59,7 +60,7 @@ public class UsersDAO extends BaseDAO {
         try {
             table.putItem(item);
         } catch (Exception e) {
-            throw new DataAccessException("Unable to add user.", ErrorType.INTERNAL_SERVER_ERROR);
+            throw new TBEInternalServerErrorException("Unable to add user.");
         }
 
         return new User(request.getUser().getEmail(), request.getUser().getFirstName(), request.getUser().getLastName());

@@ -1,7 +1,7 @@
 package com.essentials.business.technical.dao.selenium;
 
-import com.essentials.business.technical.controller.exception.ErrorType;
-import com.essentials.business.technical.dao.database.exception.DataAccessException;
+import com.essentials.business.technical.controller.exception.TBEInternalServerErrorException;
+import com.essentials.business.technical.controller.exception.TBEServerException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,7 +14,7 @@ public class SeleniumBaseDAO implements AutoCloseable {
     private final ChromeOptions options;
     protected WebDriver driver;
 
-    public SeleniumBaseDAO() throws DataAccessException {
+    public SeleniumBaseDAO() throws TBEServerException {
         try {
             String chromeDriverLocation = "chromedriver";
             System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
@@ -25,25 +25,25 @@ public class SeleniumBaseDAO implements AutoCloseable {
             options.addArguments("headless");
             this.options = options;
         } catch (Exception ex) {
-            throw new DataAccessException("Unable to initialize the driver options", ex, ErrorType.INTERNAL_SERVER_ERROR);
+            throw new TBEInternalServerErrorException("Unable to initialize the driver options", ex);
         }
 
     }
 
-    public void init() throws DataAccessException {
+    public void init() throws TBEServerException {
         try {
             driver = new ChromeDriver(options);
         } catch (Exception ex) {
-            throw new DataAccessException("Unable to start the driver.", ex, ErrorType.INTERNAL_SERVER_ERROR);
+            throw new TBEInternalServerErrorException("Unable to start the driver.", ex);
         }
     }
 
-    public void close() throws DataAccessException {
+    public void close() throws TBEServerException {
         try {
             driver.quit();
             driver = null;
         } catch (Exception ex) {
-            throw new DataAccessException("Unable to terminate the driver.", ex, ErrorType.INTERNAL_SERVER_ERROR);
+            throw new TBEInternalServerErrorException("Unable to terminate the driver.", ex);
         }
     }
 }

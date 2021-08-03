@@ -50,8 +50,6 @@ export class AceTextEditorComponent implements OnInit, AfterViewInit {
   public submitCode() {
     this.code = this.codeEditor.getValue();
 
-    // http://localhost:8080/JDoodle
-    //https://cors-anywhere.herokuapp.com/https://api.jdoodle.com/v1/execute
     this.http.post("http://localhost:8080/JDoodle", {
       script: this.code,
       language: this.codeLanguage,

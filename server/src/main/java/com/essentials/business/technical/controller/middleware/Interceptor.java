@@ -18,7 +18,7 @@ public class Interceptor extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CacheMiddleware()).excludePathPatterns("/user/validate", "/user", "/error");
+        registry.addInterceptor(new CacheMiddleware()).excludePathPatterns("/user/validate", "/user", "/error", "/JDoodle");
         super.addInterceptors(registry);
     }
 
