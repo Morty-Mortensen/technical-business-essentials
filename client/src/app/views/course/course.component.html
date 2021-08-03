@@ -10,22 +10,7 @@
         </div>
         <div class="course-left-sections-container">
           <mat-accordion *ngFor="let section of course.sections" class="course-left-section">
-            <mat-expansion-panel class="course-left-section-panel">
-              <mat-expansion-panel-header>
-                <mat-panel-title class="course-left-section-panel-title">
-                  {{section.title}}
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div class="course-left-section-topic-container" *ngFor="let topic of section.topics">
-                <mat-action-row
-                  class="course-left-section-topic-row">
-                  <button mat-flat-button
-                          class="course-left-section-topic-title">
-                    {{topic.title}}
-                  </button>
-                </mat-action-row>
-              </div>
-            </mat-expansion-panel>
+            <app-course-section [section]="section"></app-course-section>
           </mat-accordion>
         </div>
       </div>
@@ -50,8 +35,7 @@
       <div *ngFor="let activity of selectedTopic.activities;
            let i = index"
            class="course-right-activity-container">
-        <p class="course-right-activity-description">{{i + 1}}: {{activity.description}}</p>
-        <textarea class="course-right-activity-code-sample" [value]="activity.sampleCode"></textarea>
+        <app-course-activity [activity]="activity" [activityIndex]="i"></app-course-activity>
       </div>
     </div>
   </div>

@@ -1,1 +1,10 @@
-<p>course-section works!</p>
+<mat-expansion-panel class="course-left-section-panel">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="course-left-section-panel-title">
+      {{section.title}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="course-left-section-topic-container" *ngFor="let topic of section.topics">
+    <app-course-topic [topic]="topic"></app-course-topic>
+  </div>
+</mat-expansion-panel>

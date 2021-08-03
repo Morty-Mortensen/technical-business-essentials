@@ -17,7 +17,9 @@ export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let authReq = req.clone();
+    let authReq = req.clone({
+      body: req.body
+    });
 
     try {
       const user = (this.cacheService.getData('user') as User);
@@ -25,7 +27,9 @@ export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
         setParams: {
           token: user.token?.token || ''
         },
-        url: BASE_URL + (req.url.startsWith('/')) ? req.url : `/${req.url}`
+        url: BASE_URL + (req.url.startsWith('/')) ? req.url : `/${req.url}`,
+        body: req.body,
+        headers: req.headers
       });
     } catch (ex) {
       // Logging in/Registering.

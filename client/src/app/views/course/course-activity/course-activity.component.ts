@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CourseActivity} from "../../../models/course";
 
 @Component({
   selector: 'app-course-activity',
@@ -7,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseActivityComponent implements OnInit {
 
-  constructor() { }
+  @Input() activity: CourseActivity = {
+    id: -1,
+    description: '',
+    sampleCode: ''
+  };
+
+  @Input() activityIndex: number = -1;
+
+  public code: string = '';
+
+  constructor() {
+    // this.code = highlight('int test = 1', languages['typescript'], 'typescript');
+  }
 
   ngOnInit(): void {
   }

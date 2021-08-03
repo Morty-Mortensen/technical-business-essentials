@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CourseSection, CourseTopic} from "../../../models/course";
 
 @Component({
   selector: 'app-course-section',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseSectionComponent implements OnInit {
 
-  constructor() { }
+  @Input() section: CourseSection = {
+    id: -1,
+    title: '',
+    orderNumber: -1,
+    topics: []
+  };
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

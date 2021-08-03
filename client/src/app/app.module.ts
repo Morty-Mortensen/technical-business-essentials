@@ -41,6 +41,7 @@ import {CourseTopicComponent} from './views/course/course-topic/course-topic.com
 import {CourseActivityComponent} from './views/course/course-activity/course-activity.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {AceTextEditorComponent} from './components/ace-text-editor/ace-text-editor.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
     CourseSectionComponent,
     CourseTopicComponent,
     CourseActivityComponent,
+    AceTextEditorComponent,
   ],
   imports: [
     BrowserModule,

@@ -66,39 +66,6 @@
   padding-top: 10px;
 }
 
-.course-left-section-panel {
-  padding: 0 0 0 0;
-}
-
-.course-left-section-panel-title {
-  font-weight: bold;
-}
-
-.course-left-section-title {
-  margin: 0 0 0 10px;
-}
-
-.course-left-section-topic-container {
-  width: 100%;
-}
-
-.course-left-section-topic-row {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 10px 5px 10px 5px;
-}
-
-.course-left-section-topic-title {
-  margin-left: 0;
-  text-align: left;
-  width: 100%;
-  padding-left: 2px;
-  padding-right: 2px;
-  white-space: normal;
-  font-weight: normal;
-}
-
 .course-right-container {
   display: flex;
   flex-direction: column;
@@ -130,14 +97,4 @@
 
 .course-right-activity-container {
   width: 100%;
-}
-
-.course-right-activity-description {
-  margin: 0 0 0 0;
-  font-size: 16px;
-}
-
-.course-right-activity-code-sample {
-  width: 100%;
-  min-height: 200px;
 }

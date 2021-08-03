@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CourseTopic} from "../../../models/course";
 
 @Component({
   selector: 'app-course-topic',
@@ -7,7 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseTopicComponent implements OnInit {
 
-  constructor() { }
+  @Input() topic: CourseTopic = {
+    id: -1,
+    title: '',
+    videoUrl: '',
+    description: '',
+    activities: []
+  };
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
