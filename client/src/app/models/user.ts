@@ -21,4 +21,8 @@ export interface ValidateUserRequest {
   password: string;
 }
 
+export interface LogoutUserRequest {
+  token: string;
+}
+
 

@@ -2,8 +2,10 @@ package com.essentials.business.technical.controller;
 
 import com.essentials.business.technical.controller.exception.TBEServerException;
 import com.essentials.business.technical.model.User;
+import com.essentials.business.technical.model.request.LogoutUserRequest;
 import com.essentials.business.technical.model.request.PostUserRequest;
 import com.essentials.business.technical.model.request.ValidateUserRequest;
+import com.essentials.business.technical.service.AuthenticationService;
 import com.essentials.business.technical.service.UserService;
 import com.essentials.business.technical.utils.ExceptionHandler;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,7 +33,17 @@ public class UserController {
         return user;
     }
 
+    @PostMapping("user/logout")
+    public void logoutUser(@RequestBody LogoutUserRequest userRequest) throws TBEServerException {
+        AuthenticationService service = getAuthenticationService();
+        service.logoutUser(userRequest);
+    }
+
     public UserService getUserService() {
         return new UserService();
+    }
+
+    public AuthenticationService getAuthenticationService() {
+        return new AuthenticationService();
     }
 }

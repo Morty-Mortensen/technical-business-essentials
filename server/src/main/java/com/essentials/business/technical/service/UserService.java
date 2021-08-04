@@ -7,6 +7,7 @@ import com.essentials.business.technical.dao.database.AuthenticationDAO;
 import com.essentials.business.technical.dao.database.UsersDAO;
 import com.essentials.business.technical.model.Token;
 import com.essentials.business.technical.model.User;
+import com.essentials.business.technical.model.request.LogoutUserRequest;
 import com.essentials.business.technical.model.request.PostUserRequest;
 import com.essentials.business.technical.model.request.ValidateUserRequest;
 import com.essentials.business.technical.utils.StringUtils;

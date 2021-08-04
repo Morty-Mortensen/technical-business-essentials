@@ -3,6 +3,7 @@ import {CacheService} from "../../services/utils/cache.service";
 import {User} from "../../models/user";
 import {Course} from "../../models/course";
 import {KeyValuePipe} from "@angular/common";
+import {LoginService} from "../../services/http/login.service";
 
 @Component({
   selector: 'app-navbar',
@@ -50,7 +51,7 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  constructor(private cacheService: CacheService) {
+  constructor(private cacheService: CacheService, private loginService: LoginService) {
   }
 
   ngOnInit(): void {
@@ -63,7 +64,20 @@ export class NavbarComponent implements OnInit {
 
   public logout(): void {
     // Send to backend and clear that cache as well...
-    this.cacheService.clearData();
+    let userToken = '';
+    userToken = (this.cacheService.getData('user') as User).token?.token || '';
+
+    if (userToken === '') {
+      alert('User was not found, but they are logged in...something is fishy.');
+      return;
+    }
+
+    this.loginService.logout({
+      token: userToken
+    }).subscribe(() => {
+      this.cacheService.clearData();
+    });
+
   }
 
   public getUser(): User {
