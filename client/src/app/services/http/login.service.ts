@@ -8,13 +8,11 @@ import {map} from "rxjs/operators";
 })
 export class LoginService {
 
-  private baseUrl = 'http://localhost:8080'
-
   constructor(private http: HttpClient) {
   }
 
   public login(request: ValidateUserRequest) {
-    return this.http.post<User>(this.baseUrl + '/user/validate', {
+    return this.http.post<User>('/user/validate', {
       email: request.email,
       password: request.password
     })
@@ -26,7 +24,7 @@ export class LoginService {
   }
 
   public logout(request: LogoutUserRequest) {
-    return this.http.post<void>(this.baseUrl + '/user/logout', {
+    return this.http.post<void>('/user/logout', {
       token: request.token,
     })
       .pipe(

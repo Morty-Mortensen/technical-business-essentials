@@ -9,7 +9,7 @@ import {HttpStatusCode} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {LoadingService} from "../services/utils/loading.service";
 
-const BASE_URL = 'localhost:8080';
+const BASE_URL = 'http://localhost:8080/api/v1';
 
 @Injectable()
 export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
@@ -18,7 +18,10 @@ export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authReq = req.clone({
-      body: req.body
+      body: req.body,
+      params: req.params,
+      headers: req.headers,
+      url: TechnicalBusinessEssentialsInterceptor.appendBaseUrl(req.url)
     });
 
     try {
@@ -27,7 +30,7 @@ export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
         setParams: {
           token: user.token?.token || ''
         },
-        url: BASE_URL + (req.url.startsWith('/')) ? req.url : `/${req.url}`,
+        url: TechnicalBusinessEssentialsInterceptor.appendBaseUrl(req.url),
         body: req.body,
         headers: req.headers
       });
@@ -58,5 +61,9 @@ export class TechnicalBusinessEssentialsInterceptor implements HttpInterceptor {
           return new Observable<HttpEvent<any>>();
         })
       );
+  }
+
+  private static appendBaseUrl(url: string): string {
+    return (BASE_URL + ((url.startsWith('/')) ? url : `/${url}`));
   }
 }

@@ -7,14 +7,13 @@ import {PostUserRequest, User} from "../../models/user";
   providedIn: 'root'
 })
 export class RegisterService {
-  private baseUrl = 'http://localhost:8080/user'
 
   constructor(private http: HttpClient) {
   }
 
   public register(request: PostUserRequest) {
     console.log(request);
-    return this.http.post<User>(this.baseUrl, {
+    return this.http.post<User>('/user', {
       user: request.user,
       password: request.password
     })

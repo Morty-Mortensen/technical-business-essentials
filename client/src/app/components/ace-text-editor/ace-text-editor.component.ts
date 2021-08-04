@@ -52,7 +52,7 @@ export class AceTextEditorComponent implements OnInit, AfterViewInit {
   public submitCode() {
     this.code = this.codeEditor.getValue();
 
-    this.http.post("http://localhost:8080/JDoodle", {
+    this.http.post("/JDoodle", {
       script: this.code,
       language: this.codeLanguage,
       versionIndex: this.codeLanguageVersion
