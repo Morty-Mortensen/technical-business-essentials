@@ -1,1 +1,82 @@
-<p>admin-courses works!</p>
+<div style="display: flex; flex-direction: column; width: 100%; height: 100%; overflow: auto">
+  <div style="display: flex; justify-content: flex-end; align-items: center; width: 100%">
+    <button mat-fab (click)="openDialog()" class="accent-background" aria-label="Add course icon">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <ng-template #userDialogTemplate>
+    <h1>Hello there.</h1>
+    <button mat-button (click)="closeDialog()">Submit</button>
+  </ng-template>
+
+  <div style="margin-top: 40px">
+    <mat-accordion *ngFor="let course of courses">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{course.title}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-input
+          [label]="course.title"
+          (output)="course.title = $event">
+        </app-input>
+        <app-input
+          [label]="course.imageUrl"
+          (output)="course.imageUrl = $event">
+        </app-input>
+
+        <mat-accordion *ngFor="let section of course.sections">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{section.title}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-input
+              [label]="section.title"
+              (output)="section.title = $event">
+            </app-input>
+
+            <mat-accordion *ngFor="let topic of section.topics">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{topic.title}}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-input
+                  [label]="topic.title"
+                  (output)="topic.title = $event">
+                </app-input>
+                <app-input
+                  [label]="topic.videoUrl"
+                  (output)="topic.videoUrl = $event">
+                </app-input>
+
+                <mat-accordion *ngFor="let activity of topic.activities; let i = index">
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        {{(i + 1) + '. ' + activity.description}}
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-input
+                      [label]="activity.description"
+                      (output)="activity.description = $event">
+                    </app-input>
+                    <app-ace-text-editor
+                      [sampleCode]="activity.sampleCode"
+                      [submit]="false">
+                    </app-ace-text-editor>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

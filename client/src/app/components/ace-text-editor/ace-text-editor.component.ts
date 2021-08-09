@@ -6,9 +6,6 @@ import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
-import {HttpClient} from "@angular/common/http";
-import {SnackbarService} from "../../services/utils/snackbar.service";
-import {CompiledCode} from "../../models/course";
 import CodeEditor from "../../models/code-editor";
 
 const THEME = 'ace/theme/github';
@@ -24,6 +21,7 @@ export class AceTextEditorComponent implements OnInit, AfterViewInit {
   @Input() sampleCode: string = "console.log('Hello World!');";
   @Input() codeLanguage: string = 'nodejs';
   @Input() codeLanguageVersion: string = '3';
+  @Input() submit: boolean = true;
   @Output() output = new EventEmitter<CodeEditor>();
 
   @ViewChild('codeEditor') codeEditorElmRef!: ElementRef;

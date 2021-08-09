@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   public courses: Course[] = [{
     id: 1,
     title: 'Ap Computer Science',
+    imageUrl: '',
     sections: [{
       id: 1,
       title: 'History of Computer Science',
@@ -34,6 +35,7 @@ export class NavbarComponent implements OnInit {
     {
       id: 2,
       title: 'Java 101',
+      imageUrl: '',
       sections: [{
         id: 2,
         title: 'History of Java',

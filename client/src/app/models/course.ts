@@ -2,6 +2,7 @@ export interface CourseActivity {
   id: number;
   description: string;
   sampleCode: string;
+  hint?: string;
 }
 
 export interface CourseTopic {
@@ -23,6 +24,7 @@ export interface CourseSection {
 export interface Course {
   id: number;
   title: string;
+  imageUrl: string;
   sections: CourseSection[]
 }
 

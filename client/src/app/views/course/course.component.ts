@@ -13,6 +13,7 @@ export class CourseComponent implements OnInit {
   public course: Course = {
     id: 1,
     title: 'Ap Computer Science',
+    imageUrl: '',
     sections: [{
       id: 1,
       title: 'Section 1',
