@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CourseActivity} from "../../../models/course";
+import CodeEditor from "../../../models/code-editor";
 
 @Component({
   selector: 'app-course-activity',
@@ -17,6 +18,11 @@ export class CourseActivityComponent implements OnInit {
   @Input() activityIndex: number = -1;
 
   public code: string = '';
+  public codeEditorOptions: CodeEditor = {
+    script: '',
+    language: '',
+    versionIndex: ''
+  }
 
   constructor() {
     // this.code = highlight('int test = 1', languages['typescript'], 'typescript');

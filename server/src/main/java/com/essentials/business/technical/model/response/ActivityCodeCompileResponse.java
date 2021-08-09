@@ -1,15 +1,15 @@
 package com.essentials.business.technical.model.response;
 
-public class JDoodleCodeCompileResponse {
+public class ActivityCodeCompileResponse {
     private String output;
     private int statusCode;
     private String memory;
     private String cpuTime;
 
-    public JDoodleCodeCompileResponse() {
+    public ActivityCodeCompileResponse() {
     }
 
-    public JDoodleCodeCompileResponse(String output, int statusCode, String memory, String cpuTime) {
+    public ActivityCodeCompileResponse(String output, int statusCode, String memory, String cpuTime) {
         this.output = output;
         this.statusCode = statusCode;
         this.memory = memory;

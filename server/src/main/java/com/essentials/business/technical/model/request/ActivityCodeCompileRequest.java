@@ -8,22 +8,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class JDoodleCodeCompileRequest {
+public class ActivityCodeCompileRequest {
     private String clientId;
     private String clientSecret;
     private String script;
     private String language;
     private String versionIndex;
 
-    public JDoodleCodeCompileRequest() {
+    public ActivityCodeCompileRequest() {
     }
 
-    public JDoodleCodeCompileRequest(String language, String versionIndex) {
+    public ActivityCodeCompileRequest(String language, String versionIndex) {
         this.language = language;
         this.versionIndex = versionIndex;
     }
 
-    public JDoodleCodeCompileRequest(String script, String language, String versionIndex) {
+    public ActivityCodeCompileRequest(String script, String language, String versionIndex) {
         this.script = script;
         this.language = language;
         this.versionIndex = versionIndex;

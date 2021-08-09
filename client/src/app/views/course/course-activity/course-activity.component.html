@@ -1,7 +1,8 @@
 <p class="course-right-activity-description">{{activityIndex + 1}}: {{activity.description}}</p>
 <app-ace-text-editor
   class="course-right-activity-code-sample"
-  [sampleCode]="activity.sampleCode">
+  [sampleCode]="activity.sampleCode"
+  (output)="codeEditorOptions = $event">
 </app-ace-text-editor>
 
 

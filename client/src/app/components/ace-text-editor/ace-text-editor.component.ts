@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import * as ace from 'ace-builds';
 // language package, choose your own
 import 'ace-builds/src-noconflict/mode-javascript';
@@ -9,6 +9,7 @@ import 'ace-builds/src-noconflict/ext-beautify';
 import {HttpClient} from "@angular/common/http";
 import {SnackbarService} from "../../services/utils/snackbar.service";
 import {CompiledCode} from "../../models/course";
+import CodeEditor from "../../models/code-editor";
 
 const THEME = 'ace/theme/github';
 const LANG = 'ace/mode/javascript';
@@ -23,6 +24,7 @@ export class AceTextEditorComponent implements OnInit, AfterViewInit {
   @Input() sampleCode: string = "console.log('Hello World!');";
   @Input() codeLanguage: string = 'nodejs';
   @Input() codeLanguageVersion: string = '3';
+  @Output() output = new EventEmitter<CodeEditor>();
 
   @ViewChild('codeEditor') codeEditorElmRef!: ElementRef;
   private codeEditor!: ace.Ace.Editor;
@@ -30,7 +32,7 @@ export class AceTextEditorComponent implements OnInit, AfterViewInit {
 
   public code: string = '';
 
-  constructor(private http: HttpClient, private snackBar: SnackbarService) {
+  constructor() {
 
   }
 
@@ -52,18 +54,23 @@ export class AceTextEditorComponent implements OnInit, AfterViewInit {
   public submitCode() {
     this.code = this.codeEditor.getValue();
 
-    this.http.post("/JDoodle", {
+    this.output.emit({
       script: this.code,
       language: this.codeLanguage,
       versionIndex: this.codeLanguageVersion
-    }).subscribe(res => {
-      this.snackBar.show('Compiled output: ' + (res as CompiledCode).output)
-      // console.log("Success")
-      // console.log(res);
-    }, err => {
-      console.log("Error :(")
-      console.log(err)
-    });
+    })
+    // this.http.post("/JDoodle", {
+    //   script: this.code,
+    //   language: this.codeLanguage,
+    //   versionIndex: this.codeLanguageVersion
+    // }).subscribe(res => {
+    //   this.snackBar.show('Compiled output: ' + (res as CompiledCode).output)
+    //   // console.log("Success")
+    //   // console.log(res);
+    // }, err => {
+    //   console.log("Error :(")
+    //   console.log(err)
+    // });
   }
 
   // Makes the code look sweet!
